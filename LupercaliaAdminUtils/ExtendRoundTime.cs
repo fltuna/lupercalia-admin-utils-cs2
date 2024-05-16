@@ -17,7 +17,7 @@ namespace LupercaliaAdminUtils {
             int extendTime = 0;
 
             try {
-                extendTime = Convert.ToInt16(info.GetArg(1));
+                extendTime = Convert.ToInt32(info.GetArg(1));
             } catch (FormatException _){
                 client.PrintToChat(MessageWithPrefix("You entered invalid number!"));
                 return;
