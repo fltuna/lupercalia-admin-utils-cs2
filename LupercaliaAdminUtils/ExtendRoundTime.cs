@@ -2,10 +2,13 @@ using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Modules.Commands;
 using CounterStrikeSharp.API.Modules.Entities.Constants;
+using CounterStrikeSharp.API.Modules.Admin;
 using Microsoft.Extensions.Logging;
 
 namespace LupercaliaAdminUtils {
     public partial class LupercaliaAdminUtils {
+
+        [RequiresPermissions(@"css/root")]
         private void CommandExtendRoundTime(CCSPlayerController? client, CommandInfo info) {
             if(client == null) 
                 return;
