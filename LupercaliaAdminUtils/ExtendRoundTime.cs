@@ -14,6 +14,7 @@ namespace LupercaliaAdminUtils {
                 return;
 
             if(info.ArgCount < 2) {
+                client.PrintToChat("Usage: !exttime <number of seconds>");
                 return;
             }
 
