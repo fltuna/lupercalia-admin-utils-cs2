@@ -17,6 +17,7 @@ namespace LupercaliaAdminUtils {
 
         public override void Load(bool hotReload) {
             AddCommand("css_exttime", "Extend round time", CommandExtendRoundTime);
+            AddCommand("css_ert", "Extend round time", CommandExtendRoundTime);
             AddCommand("css_endround", "Terminate the current round", CommandTerminateRound);
         }
     }
