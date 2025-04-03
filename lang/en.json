@@ -1,0 +1,7 @@
+﻿{
+    "General.Command.Notification.InvalidArgumentsInput": "Invalid arguments",
+    "General.Command.Notification.UnknownError": "An unknown error occurred! check server logs.",
+    "ExtendRoundTime.Command.Notification.Usage": "Usage: !exttime <number of seconds>",
+    "ExtendRoundTime.Command.Notification.SuccessfullyExtended": "Round time extended successfully to {0}s from {1}s",
+    "TerminateRound.Command.Notification.Terminating": "Terminating round..."
+}

@@ -14,7 +14,7 @@ namespace LupercaliaAdminUtils {
                 return;
 
             if(info.ArgCount < 2) {
-                client.PrintToChat("Usage: !exttime <number of seconds>");
+                client.PrintToChat(this.LocalizeStringWithPrefix("ExtendRoundTime.Command.Notification.Usage"));
                 return;
             }
 
@@ -23,10 +23,10 @@ namespace LupercaliaAdminUtils {
             try {
                 extendTime = Convert.ToInt32(info.GetArg(1));
             } catch (FormatException _){
-                client.PrintToChat(MessageWithPrefix("You entered invalid number!"));
+                client.PrintToChat(this.LocalizeStringWithPrefix("General.Command.Notification.InvalidArgumentsInput"));
                 return;
             } catch(Exception e) {
-                client.PrintToChat(MessageWithPrefix("An unknown error occurred! check server logs."));
+                client.PrintToChat(this.LocalizeStringWithPrefix("General.Command.Notification.UnknownError"));
                 Logger.LogError($"Command extend round time failed due to:\n{e.StackTrace}");
                 return;
             }
@@ -40,7 +40,7 @@ namespace LupercaliaAdminUtils {
 
             Utilities.SetStateChanged(gameRulesProxy, "CCSGameRulesProxy", "m_pGameRules");
 
-            client.PrintToChat(MessageWithPrefix($"Round time extended successfully to {gameRules.RoundTime}s from {roundTimeBefore}s"));
+            client.PrintToChat(this.LocalizeStringWithPrefix("ExtendRoundTime.Command.Notification.SuccessfullyExtended", gameRules.RoundTime, roundTimeBefore));
         }
     }
 }

@@ -12,8 +12,8 @@ namespace LupercaliaAdminUtils {
         private void CommandTerminateRound(CCSPlayerController? client, CommandInfo info) {
             if(client == null) 
                 return;
-
             
+            client.PrintToChat(this.LocalizeStringWithPrefix("TerminateRound.Command.Notification.Terminating"));
             Utilities.FindAllEntitiesByDesignerName<CCSGameRulesProxy>("cs_gamerules").First().GameRules?.TerminateRound(40.0F, RoundEndReason.RoundDraw);
         }
     }
