@@ -5,95 +5,81 @@ on:
     branches:
       - main
     tags:
-      - '*'
+      - 'v*'
   release:
     types: [created]
 
 jobs:
   build:
     runs-on: windows-latest
+    if: startsWith(github.ref, 'refs/tags/') == false && contains(github.event.head_commit.message, '[no ci]') == false
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '8.0.x'
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
 
-    - name: Install dependencies
-      run: nuget restore
+      - name: Install dependencies
+        run: nuget restore
 
-    - name: Build
-      run: dotnet build -c Release -p:DebugType=None -p:DebugSymbols=false
+      - name: Build
+        run: dotnet build -c Release -p:DebugType=None -p:DebugSymbols=false
 
   publish:
     runs-on: windows-latest
     if: startsWith(github.ref, 'refs/tags/')
-    needs: build
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '8.0.x'
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
 
-    - name: Install dependencies
-      run: nuget restore
+      - name: Install dependencies
+        run: nuget restore
 
-    - name: Build
-      run: dotnet build -c Release -p:DebugType=None -p:DebugSymbols=false
+      - name: Build
+        run: dotnet build -c Release -p:DebugType=None -p:DebugSymbols=false
 
-    - name: Create release artifacts
-      run: |
-        mkdir artifacts
-        cp -R LupercaliaAdminUtils/bin/Release/* artifacts/
+      - name: Create release artifacts
+        run: |
+          mkdir artifacts
+          Copy-Item -Path "LupercaliaAdminUtils\bin\Release\*\LupercaliaAdminUtils.dll" -Destination "artifacts\LupercaliaAdminUtils.dll" -Force
+          Copy-Item -Path "lang\" -Destination "artifacts\lang\" -Recurse -Force
 
-    - name: Upload release assets
-      uses: actions/upload-artifact@v3
-      with:
-        name: release-artifacts
-        path: artifacts/
+      - name: Compress artifacts
+        run:
+          Compress-Archive -Path artifacts/* -Destination LupercaliaAdminUtils.zip
+
+      - name: Upload release assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-artifacts
+          path: LupercaliaAdminUtils.zip
 
   release:
     runs-on: windows-latest
     needs: publish
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    - name: Download artifacts
-      uses: actions/download-artifact@v3
-      with:
-        name: release-artifacts
-        path: artifacts/
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: release-artifacts
+          path: artifacts/
 
-    - name: check files
-      run : |
-        tree
-
-    - name: Create GitHub Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref_name }}
-        release_name: Release ${{ github.ref_name }}
-        draft: false
-        prerelease: false
-
-    - name: Upload Release Asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: artifacts/net8.0/LupercaliaAdminUtils.dll
-        asset_name: LupercaliaAdminUtils.dll
-        asset_content_type: application/octet-stream
+      - name: Create Release and Upload Asset
+        run: |
+          gh release create "${{ github.ref_name }}" --title "Release ${{ github.ref_name }}" --generate-notes --draft=false artifacts/LupercaliaAdminUtils.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
