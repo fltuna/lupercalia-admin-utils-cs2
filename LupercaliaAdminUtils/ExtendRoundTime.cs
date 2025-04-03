@@ -1,46 +1,76 @@
 using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Modules.Commands;
-using CounterStrikeSharp.API.Modules.Entities.Constants;
 using CounterStrikeSharp.API.Modules.Admin;
+using LupercaliaAdminUtils.model;
 using Microsoft.Extensions.Logging;
 
-namespace LupercaliaAdminUtils {
-    public partial class LupercaliaAdminUtils {
+namespace LupercaliaAdminUtils;
 
-        [RequiresPermissions(@"css/root")]
-        private void CommandExtendRoundTime(CCSPlayerController? client, CommandInfo info) {
-            if(client == null) 
-                return;
+public class ExtendRoundTime: IPluginModule 
+{
+    
+    public string PluginModuleName => "ExtendRoundTime";
 
-            if(info.ArgCount < 2) {
-                client.PrintToChat(this.LocalizeStringWithPrefix("ExtendRoundTime.Command.Notification.Usage"));
-                return;
-            }
+    private readonly LupercaliaAdminUtils _plugin;
+    
+    public ExtendRoundTime(LupercaliaAdminUtils plugin)
+    {
+        _plugin = plugin;
+        
+        _plugin.AddCommand("css_ert", "Extend round time", CommandExtendRoundTime);
+        _plugin.AddCommand("css_exttime", "Extend round time", CommandExtendRoundTime);
+    }
+    
+    
+    public void AllPluginsLoaded()
+    {
+    }
 
-            int extendTime = 0;
+    public void UnloadModule()
+    {
+        _plugin.RemoveCommand("css_ert",  CommandExtendRoundTime);
+        _plugin.RemoveCommand("css_exttime", CommandExtendRoundTime);
+    }
+    
+    
+    [RequiresPermissions(@"css/root")]
+    private void CommandExtendRoundTime(CCSPlayerController? client, CommandInfo info)
+    {
+        if(client == null) 
+            return;
 
-            try {
-                extendTime = Convert.ToInt32(info.GetArg(1));
-            } catch (FormatException _){
-                client.PrintToChat(this.LocalizeStringWithPrefix("General.Command.Notification.InvalidArgumentsInput"));
-                return;
-            } catch(Exception e) {
-                client.PrintToChat(this.LocalizeStringWithPrefix("General.Command.Notification.UnknownError"));
-                Logger.LogError($"Command extend round time failed due to:\n{e.StackTrace}");
-                return;
-            }
-            
-            CCSGameRulesProxy gameRulesProxy = Utilities.FindAllEntitiesByDesignerName<CCSGameRulesProxy>("cs_gamerules").First()!;
-            CCSGameRules gameRules = gameRulesProxy.GameRules!;
-
-            int roundTimeBefore = gameRules.RoundTime;
-            gameRules.RoundTime = gameRules.RoundTime + extendTime;
-
-
-            Utilities.SetStateChanged(gameRulesProxy, "CCSGameRulesProxy", "m_pGameRules");
-
-            client.PrintToChat(this.LocalizeStringWithPrefix("ExtendRoundTime.Command.Notification.SuccessfullyExtended", gameRules.RoundTime, roundTimeBefore));
+        if(info.ArgCount < 2)
+        {
+            client.PrintToChat(_plugin.LocalizeStringWithPrefix("ExtendRoundTime.Command.Notification.Usage"));
+            return;
         }
+
+        int extendTime = 0;
+
+        try
+        {
+            extendTime = Convert.ToInt32(info.GetArg(1));
+        } catch (FormatException _)
+        {
+            client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.InvalidArgumentsInput"));
+            return;
+        } catch(Exception e)
+        {
+            client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.UnknownError"));
+            _plugin.Logger.LogError($"Command extend round time failed due to:\n{e.StackTrace}");
+            return;
+        }
+            
+        CCSGameRulesProxy gameRulesProxy = Utilities.FindAllEntitiesByDesignerName<CCSGameRulesProxy>("cs_gamerules").First()!;
+        CCSGameRules gameRules = gameRulesProxy.GameRules!;
+
+        int roundTimeBefore = gameRules.RoundTime;
+        gameRules.RoundTime = gameRules.RoundTime + extendTime;
+
+
+        Utilities.SetStateChanged(gameRulesProxy, "CCSGameRulesProxy", "m_pGameRules");
+
+        client.PrintToChat(_plugin.LocalizeStringWithPrefix("ExtendRoundTime.Command.Notification.SuccessfullyExtended", gameRules.RoundTime, roundTimeBefore));
     }
 }

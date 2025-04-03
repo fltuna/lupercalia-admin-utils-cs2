@@ -1,10 +1,15 @@
 ﻿using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Modules.Utils;
+using LupercaliaAdminUtils.model;
+using Microsoft.Extensions.Logging;
 
 namespace LupercaliaAdminUtils {
-    public partial class LupercaliaAdminUtils: BasePlugin {
+    public class LupercaliaAdminUtils: BasePlugin {
         private static readonly string PluginPrefix = $" {ChatColors.DarkRed}[{ChatColors.Blue}LPŘ AU{ChatColors.DarkRed}]{ChatColors.Default}";
 
+        private readonly HashSet<IPluginModule> _loadedModules = new();
+
+        
         public string LocalizeStringWithPrefix(string languageKey, params object[] args)
         {
             return $"{PluginPrefix} {Localizer[languageKey, args]}";
@@ -26,9 +31,28 @@ namespace LupercaliaAdminUtils {
         public override void Load(bool hotReload) {
             _instance = this;
             
-            AddCommand("css_exttime", "Extend round time", CommandExtendRoundTime);
-            AddCommand("css_ert", "Extend round time", CommandExtendRoundTime);
-            AddCommand("css_endround", "Terminate the current round", CommandTerminateRound);
+            InitializeModule(new TerminateRound(this));
+            InitializeModule(new ExtendRoundTime(this));
+        }
+        
+        public override void Unload(bool hotReload)
+        {
+            UnloadAllModules();
+        }
+    
+        private void InitializeModule(IPluginModule module)
+        {
+            _loadedModules.Add(module);
+            Logger.LogInformation($"{module.PluginModuleName} has been initialized");
+        }
+
+        private void UnloadAllModules()
+        {
+            foreach (IPluginModule loadedModule in _loadedModules)
+            {
+                loadedModule.UnloadModule();
+                Logger.LogInformation($"{loadedModule.PluginModuleName} has been unloaded.");
+            }
         }
     }
 }
