@@ -42,7 +42,7 @@ public class RespawnPlayer: IPluginModule
         {
             if (PlayerUtil.IsPlayerAlive(client))
             {
-                client.PrintToChat(_plugin.LocalizeStringWithPrefix("Respawn.Command.Notification.TargetIsStillAlive", client.PlayerName));
+                client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetIsStillAlive", client.PlayerName));
                 return;
             }
             
@@ -84,7 +84,7 @@ public class RespawnPlayer: IPluginModule
 
             if (PlayerUtil.IsPlayerAlive(target))
             {
-                client.PrintToChat(_plugin.LocalizeStringWithPrefix("Respawn.Command.Notification.TargetIsStillAlive", target.PlayerName));
+                client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetIsStillAlive", target.PlayerName));
                 return;
             }
             

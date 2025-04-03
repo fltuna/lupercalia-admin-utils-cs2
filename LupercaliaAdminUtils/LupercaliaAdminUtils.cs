@@ -36,6 +36,7 @@ public class LupercaliaAdminUtils: BasePlugin {
         InitializeModule(new TerminateRound(this));
         InitializeModule(new ExtendRoundTime(this));
         InitializeModule(new RespawnPlayer(this));
+        InitializeModule(new SetHealth(this));
     }
         
     public override void Unload(bool hotReload)
