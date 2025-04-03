@@ -66,8 +66,11 @@ public class RespawnPlayer: IPluginModule
             foreach(CCSPlayerController target in targets) {
                 if(target.IsValid || !target.IsBot || !target.IsHLTV)
                     continue;
+                
+                if (PlayerUtil.IsPlayerAlive(target))
+                    continue;
             
-                client.PrintToChat(_plugin.LocalizeStringWithPrefix("Respawn.Command.Notification.YouHaveRespawned"));
+                client.PrintToChat(_plugin.LocalizeStringWithPrefix("Respawn.Command.Notification.YouHaveRespawned", client.PlayerName));
                 target.Respawn();
             }
 
@@ -86,6 +89,7 @@ public class RespawnPlayer: IPluginModule
             }
             
             target.Respawn();
+            client.PrintToChat(_plugin.LocalizeStringWithPrefix("Respawn.Command.Notification.YouHaveRespawned", client.PlayerName));
             Server.PrintToChatAll(_plugin.LocalizeStringWithPrefix("Respawn.Command.Broadcast.PlayerRespawned", client.PlayerName, target.PlayerName));
         }
     }
