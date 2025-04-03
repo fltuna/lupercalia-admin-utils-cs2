@@ -1,7 +1,19 @@
 ﻿{
+    "General.Target.Name.All": "All Players",
+    "General.Target.Name.Bots": "Bots",
+    "General.Target.Name.Humans": "Humans",
+    "General.Target.Name.Alive": "Alive Players",
+    "General.Target.Name.Dead": "Dead Players",
+    "General.Target.Name.CounterTerrorist": "CTs",
+    "General.Target.Name.Terrorist": "Ts",
+    "General.Target.Name.Spectator": "Spectators",
     "General.Command.Notification.InvalidArgumentsInput": "Invalid arguments",
     "General.Command.Notification.UnknownError": "An unknown error occurred! check server logs.",
+    "General.Command.Notification.TargetNotFound": "Specified target is not found!",
     "ExtendRoundTime.Command.Notification.Usage": "Usage: !exttime <number of seconds>",
     "ExtendRoundTime.Command.Notification.SuccessfullyExtended": "Round time extended successfully to {0}s from {1}s",
-    "TerminateRound.Command.Notification.Terminating": "Terminating round..."
+    "TerminateRound.Command.Notification.Terminating": "Terminating round...",
+    "Respawn.Command.Broadcast.PlayerRespawned": "{0} respawned {1}",
+    "Respawn.Command.Notification.YouHaveRespawned": "You have been respawned by {0}",
+    "Respawn.Command.Notification.TargetIsStillAlive": "{0} is still alive!"
 }
