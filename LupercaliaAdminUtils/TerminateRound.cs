@@ -31,7 +31,8 @@ public class TerminateRound: IPluginModule
     }
 
     [RequiresPermissions(@"css/root")]
-    private void CommandTerminateRound(CCSPlayerController? client, CommandInfo info) {
+    private void CommandTerminateRound(CCSPlayerController? client, CommandInfo info)
+    {
         if(client == null) 
             return;
             
