@@ -26,5 +26,8 @@
     "SetCash.Command.Notification.Usage": "Usage: !cash <target> <amount>",
     "SetCash.Command.Notification.SetCash": "Set {0} cash to {1}",
     "SetTeam.Command.Notification.Usage": "Usage: !team <target> <teamID>",
-    "SetTeam.Command.Broadcast.SetTeam": "{0} moved {1} to {2}"
+    "SetTeam.Command.Broadcast.SetTeam": "{0} moved {1} to {2}",
+    "ToggleBuyZone.Command.Notification.Usage": "Usage: !buyzone <target> <0|1>",
+    "ToggleBuyZone.Command.Notification.Enabled": "Set {0} BuyZone status to {green}Enabled",
+    "ToggleBuyZone.Command.Notification.Disabled": "Set {0} BuyZone status to {red}Disabled"
 }
