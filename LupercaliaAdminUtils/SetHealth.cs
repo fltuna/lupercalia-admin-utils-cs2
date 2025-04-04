@@ -85,7 +85,7 @@ public class SetHealth: IPluginModule
         if (hasTypedTargets && targets.Count() >= 2)
         {
             foreach(CCSPlayerController target in targets) {
-                if(!target.IsHLTV)
+                if(target.IsHLTV)
                     continue;
                 
                 if (!PlayerUtil.IsPlayerAlive(target))
@@ -111,7 +111,7 @@ public class SetHealth: IPluginModule
             
             target.PlayerPawn.Value!.Health = targetHealth;
             Utilities.SetStateChanged(target.PlayerPawn.Value!, "CBaseEntity", "m_iHealth");
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("SetHealth.Command.Notification.SetHealth", target.PlayerName, targetHealth));
+            client.PrintToChat(_plugin.LocalizeStringWithPrefix("SetHealth.Command.Notification.SetHealth", target.PlayerName + "'s", targetHealth));
         }
     }
 }
