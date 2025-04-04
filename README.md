@@ -20,7 +20,7 @@ Extends a round time while in the round.
 or you can use `css_ert <number of seconds>` and `!ert <number of seconds>` instead.
 
 
-###
+### Set Health
 
 Set health of player.
 
