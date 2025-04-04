@@ -40,6 +40,7 @@ public class LupercaliaAdminUtils: BasePlugin {
         InitializeModule(new SetCash(this));
         InitializeModule(new SetKevlar(this));
         InitializeModule(new SetTeam(this));
+        InitializeModule(new ToggleBuyZone(this));
     }
         
     public override void Unload(bool hotReload)
