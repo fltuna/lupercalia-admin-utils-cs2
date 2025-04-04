@@ -24,5 +24,7 @@
     "SetKevlar.Command.Notification.Usage": "Usage: !kev <target> <amount>",
     "SetKevlar.Command.Notification.SetKevlar": "Set {0} kevlar to {1}",
     "SetCash.Command.Notification.Usage": "Usage: !cash <target> <amount>",
-    "SetCash.Command.Notification.SetCash": "Set {0} cash to {1}"
+    "SetCash.Command.Notification.SetCash": "Set {0} cash to {1}",
+    "SetTeam.Command.Notification.Usage": "Usage: !team <target> <teamID>",
+    "SetTeam.Command.Broadcast.SetTeam": "{0} moved {1} to {2}"
 }
