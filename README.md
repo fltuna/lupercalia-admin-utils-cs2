@@ -32,3 +32,10 @@ Set health of player.
 Respawns a player.
 
 `css_respawn <target>` or type `!respawn <target>` in chat to use.
+
+
+### Set Cash
+
+Set player's cash.
+
+`css_cash <target> <amount>` or type `!cash <target> <amount>` in chat to use.
