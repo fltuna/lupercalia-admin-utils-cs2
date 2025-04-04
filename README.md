@@ -27,6 +27,15 @@ Set health of player.
 `css_hp <target> <health>` or type `!hp <target> <health>` in chat to use.
 
 
+### Set Kevlar
+
+Set armor value of player.
+
+`css_setkevlar <target> <amount>` or type `!setkevlar <target> <amount>` in chat to use.
+
+or you can use `css_setkev <target> <amount>` and `!setkev <target> <amount>` instead.
+
+
 ### Respawn Player
 
 Respawns a player.
