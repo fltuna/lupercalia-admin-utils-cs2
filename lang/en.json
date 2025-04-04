@@ -18,6 +18,7 @@
     "TerminateRound.Command.Notification.Terminating": "Terminating round...",
     "Respawn.Command.Broadcast.PlayerRespawned": "{0} respawned {1}",
     "Respawn.Command.Notification.YouHaveRespawned": "You have been respawned by {0}",
+    "Respawn.Command.Notification.Usage": "Usage: !respawn <target>",
     "SetHealth.Command.Notification.Usage": "Usage: !hp <target> <health>",
     "SetHealth.Command.Notification.SetHealth": "{0} HP set to {1}"
 }
