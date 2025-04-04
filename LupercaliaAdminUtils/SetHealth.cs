@@ -12,7 +12,7 @@ namespace LupercaliaAdminUtils;
 public class SetHealth: IPluginModule
 {
 
-    public string PluginModuleName => "TEMPLATE";
+    public string PluginModuleName => "SetHealth";
     
     private readonly LupercaliaAdminUtils _plugin;
 
