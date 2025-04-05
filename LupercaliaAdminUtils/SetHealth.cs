@@ -92,6 +92,7 @@ public class SetHealth: IPluginModule
                     continue;
                 
                 target.PlayerPawn.Value!.Health = targetHealth;
+                target.PlayerPawn.Value.MaxHealth = targetHealth;
                 Utilities.SetStateChanged(target.PlayerPawn.Value!, "CBaseEntity", "m_iHealth");
             }
 
@@ -110,6 +111,7 @@ public class SetHealth: IPluginModule
             }
             
             target.PlayerPawn.Value!.Health = targetHealth;
+            target.PlayerPawn.Value.MaxHealth = targetHealth;
             Utilities.SetStateChanged(target.PlayerPawn.Value!, "CBaseEntity", "m_iHealth");
             client.PrintToChat(_plugin.LocalizeStringWithPrefix("SetHealth.Command.Notification.SetHealth", target.PlayerName + "'s", targetHealth));
         }
