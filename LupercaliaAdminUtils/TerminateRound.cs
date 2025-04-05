@@ -30,7 +30,7 @@ public class TerminateRound: IPluginModule
         _plugin.RemoveCommand("css_endround", CommandTerminateRound);
     }
 
-    [RequiresPermissions(@"css/root")]
+    [RequiresPermissions(@"css/generic")]
     private void CommandTerminateRound(CCSPlayerController? client, CommandInfo info)
     {
         if(client == null) 

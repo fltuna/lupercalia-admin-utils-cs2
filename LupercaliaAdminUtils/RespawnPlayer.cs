@@ -33,7 +33,7 @@ public class RespawnPlayer: IPluginModule
     }
     
     
-    [RequiresPermissions(@"css/slay")]
+    [RequiresPermissions(@"css/generic")]
     private void CommandRespawnPlayer(CCSPlayerController? client, CommandInfo info) {
         if(client == null) 
             return;

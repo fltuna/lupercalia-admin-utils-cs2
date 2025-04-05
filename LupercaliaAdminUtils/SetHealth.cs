@@ -36,7 +36,7 @@ public class SetHealth: IPluginModule
 
 
 
-    [RequiresPermissions(@"css/slay")]
+    [RequiresPermissions(@"css/generic")]
     private void CommandSetHealth(CCSPlayerController? client, CommandInfo info)
     {
         if (client == null)
