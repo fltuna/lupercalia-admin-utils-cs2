@@ -61,7 +61,7 @@ public class SetTeam: IPluginModule
         catch(Exception e)
         {
             client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.UnknownError"));
-            _plugin.Logger.LogError($"Command set health failed due to:\n{e.StackTrace}");
+            _plugin.Logger.LogError($"Command set team failed due to:\n{e.StackTrace}");
             return;
         }
 

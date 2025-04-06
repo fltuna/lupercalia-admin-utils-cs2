@@ -63,7 +63,7 @@ public class SetKevlar: IPluginModule
         catch(Exception e)
         {
             client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.UnknownError"));
-            _plugin.Logger.LogError($"Command set health failed due to:\n{e.StackTrace}");
+            _plugin.Logger.LogError($"Command set kevlar failed due to:\n{e.StackTrace}");
             return;
         }
             
