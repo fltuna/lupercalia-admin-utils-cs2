@@ -59,3 +59,16 @@ Set player's team.
 1 = Spectator
 2 = Terrorist
 3 = CounterTerrorist
+
+
+### Set Model
+
+Set player's model.
+
+`css_setmodel <target> <modelPath>` or type `!setmodel <target> <modelPath>` in chat to use.
+
+### Get Model
+
+`css_getmodel <target>` or type `!getmodel <target>` in chat to use.
+
+If there is a multiple target found, Plugin will print the information to the console instead of chat. 

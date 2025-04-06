@@ -13,6 +13,7 @@
     "General.Command.Notification.TargetIsStillAlive": "{0} is still alive",
     "General.Command.Notification.UnknownError": "An unknown error occurred! check server logs.",
     "General.Command.Notification.TargetNotFound": "Specified target is not found!",
+    "General.Command.Notification.SeeClientConsoleOutput": "See client console output",
     "ExtendRoundTime.Command.Notification.Usage": "Usage: !exttime <number of seconds>",
     "ExtendRoundTime.Command.Notification.SuccessfullyExtended": "Round time extended successfully to {0}s from {1}s",
     "TerminateRound.Command.Notification.Terminating": "Terminating round...",
@@ -29,5 +30,9 @@
     "SetTeam.Command.Broadcast.SetTeam": "{0} moved {1} to {2}",
     "ToggleBuyZone.Command.Notification.Usage": "Usage: !buyzone <target> <0|1>",
     "ToggleBuyZone.Command.Notification.Enabled": "Set {0} BuyZone status to {green}Enabled",
-    "ToggleBuyZone.Command.Notification.Disabled": "Set {0} BuyZone status to {red}Disabled"
+    "ToggleBuyZone.Command.Notification.Disabled": "Set {0} BuyZone status to {red}Disabled",
+    "SetPlayerModel.Command.Notification.Usage": "Usage: !setmodel <target> <modelPath>",
+    "SetPlayerModel.Command.Broadcast.SetModel": "{lime}{0}{default} set {lime}{1}{default} model to {green}{2}",
+    "GetPlayerModel.Command.Notification.Usage": "Usage: !getmodel <target>",
+    "GetPlayerModel.Command.Notification.PlayerModel": "{lime}{0}{default} is using {green}{1}"
 }
