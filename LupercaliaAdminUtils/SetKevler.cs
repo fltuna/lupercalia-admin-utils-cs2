@@ -101,7 +101,7 @@ public class SetKevlar: IPluginModule
             
             target.PlayerPawn.Value!.ArmorValue = targetKevlarAmount;
             Utilities.SetStateChanged(target.PlayerPawn.Value!, "CCSPlayerPawn", "m_ArmorValue");
-            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("SetKevlar.Command.Notification.SetKevlar", target.PlayerName + "'s", targetKevlarAmount));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("SetKevlar.Command.Notification.SetKevlar", target.PlayerName, targetKevlarAmount));
         }
     }
 }

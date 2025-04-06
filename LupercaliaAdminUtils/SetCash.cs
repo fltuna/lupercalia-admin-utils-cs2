@@ -104,7 +104,7 @@ public class SetCash: IPluginModule
             
             target.InGameMoneyServices!.Account = targetCash;
             Utilities.SetStateChanged(target, "CCSPlayerController", "m_pInGameMoneyServices");
-            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("SetCash.Command.Notification.SetCash", target.PlayerName + "'s", targetCash));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("SetCash.Command.Notification.SetCash", target.PlayerName, targetCash));
         }
     }
 }

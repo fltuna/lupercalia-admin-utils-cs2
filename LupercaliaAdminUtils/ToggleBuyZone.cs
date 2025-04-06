@@ -104,7 +104,7 @@ public class ToggleBuyZone: IPluginModule
         else
         {
             CCSPlayerController target = targets.First();
-            string playerName = target.PlayerName + "'s";
+            string playerName = target.PlayerName;
 
             if (!PlayerUtil.IsPlayerAlive(target))
             {
