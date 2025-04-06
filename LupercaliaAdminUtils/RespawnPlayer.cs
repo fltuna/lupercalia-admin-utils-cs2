@@ -34,13 +34,11 @@ public class RespawnPlayer: IPluginModule
     
     
     [RequiresPermissions(@"css/generic")]
-    private void CommandRespawnPlayer(CCSPlayerController? client, CommandInfo info) {
-        if(client == null) 
-            return;
-
+    private void CommandRespawnPlayer(CCSPlayerController? client, CommandInfo info)
+    {
         if (info.ArgCount <= 1)
         {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("Respawn.Command.Notification.Usage"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("Respawn.Command.Notification.Usage"));
             return;
         }
         
@@ -48,9 +46,11 @@ public class RespawnPlayer: IPluginModule
         TargetResult targets = info.GetArgTargetResult(1);
         
         if(!targets.Any()) {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetNotFound"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetNotFound"));
             return;
         }
+        
+        string executorName = PlayerUtil.GetPlayerName(client);
 
         bool hasTypedTargets = Target.TargetTypeMap.ContainsKey(info.GetArg(1));
 
@@ -63,13 +63,13 @@ public class RespawnPlayer: IPluginModule
                 if (PlayerUtil.IsPlayerAlive(target))
                     continue;
             
-                target.PrintToChat(_plugin.LocalizeStringWithPrefix("Respawn.Command.Notification.YouHaveRespawned", client.PlayerName));
+                target.PrintToChat(_plugin.LocalizeStringWithPrefix("Respawn.Command.Notification.YouHaveRespawned", executorName));
                 target.Respawn();
             }
 
             string targetName = TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1));
             
-            Server.PrintToChatAll(_plugin.LocalizeStringWithPrefix("Respawn.Command.Broadcast.PlayerRespawned", client.PlayerName, targetName));
+            Server.PrintToChatAll(_plugin.LocalizeStringWithPrefix("Respawn.Command.Broadcast.PlayerRespawned", executorName, targetName));
         }
         else
         {
@@ -77,13 +77,13 @@ public class RespawnPlayer: IPluginModule
 
             if (PlayerUtil.IsPlayerAlive(target))
             {
-                client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetIsStillAlive", target.PlayerName));
+                info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetIsStillAlive", target.PlayerName));
                 return;
             }
             
             target.Respawn();
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("Respawn.Command.Notification.YouHaveRespawned", client.PlayerName));
-            Server.PrintToChatAll(_plugin.LocalizeStringWithPrefix("Respawn.Command.Broadcast.PlayerRespawned", client.PlayerName, target.PlayerName));
+            target.PrintToChat(_plugin.LocalizeStringWithPrefix("Respawn.Command.Notification.YouHaveRespawned", executorName));
+            Server.PrintToChatAll(_plugin.LocalizeStringWithPrefix("Respawn.Command.Broadcast.PlayerRespawned", executorName, target.PlayerName));
         }
     }
 }

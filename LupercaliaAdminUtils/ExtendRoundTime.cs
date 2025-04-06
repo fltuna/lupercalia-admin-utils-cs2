@@ -37,12 +37,9 @@ public class ExtendRoundTime: IPluginModule
     [RequiresPermissions(@"css/root")]
     private void CommandExtendRoundTime(CCSPlayerController? client, CommandInfo info)
     {
-        if(client == null) 
-            return;
-
         if(info.ArgCount < 2)
         {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("ExtendRoundTime.Command.Notification.Usage"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("ExtendRoundTime.Command.Notification.Usage"));
             return;
         }
 
@@ -53,11 +50,11 @@ public class ExtendRoundTime: IPluginModule
             extendTime = Convert.ToInt32(info.GetArg(1));
         } catch (FormatException _)
         {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.InvalidArgumentsInput"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.InvalidArgumentsInput"));
             return;
         } catch(Exception e)
         {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.UnknownError"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.UnknownError"));
             _plugin.Logger.LogError($"Command extend round time failed due to:\n{e.StackTrace}");
             return;
         }
@@ -71,6 +68,6 @@ public class ExtendRoundTime: IPluginModule
 
         Utilities.SetStateChanged(gameRulesProxy, "CCSGameRulesProxy", "m_pGameRules");
 
-        client.PrintToChat(_plugin.LocalizeStringWithPrefix("ExtendRoundTime.Command.Notification.SuccessfullyExtended", gameRules.RoundTime, roundTimeBefore));
+        info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("ExtendRoundTime.Command.Notification.SuccessfullyExtended", gameRules.RoundTime, roundTimeBefore));
     }
 }

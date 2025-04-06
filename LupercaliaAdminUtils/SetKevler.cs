@@ -39,13 +39,9 @@ public class SetKevlar: IPluginModule
     [RequiresPermissions(@"css/generic")]
     private void CommandSetKevlar(CCSPlayerController? client, CommandInfo info)
     {
-        if (client == null)
-            return;
-        
-        
         if (info.ArgCount <= 2)
         {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("SetKevlar.Command.Notification.Usage"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("SetKevlar.Command.Notification.Usage"));
             return;
         }
         
@@ -57,12 +53,12 @@ public class SetKevlar: IPluginModule
         }
         catch (FormatException _)
         {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.InvalidArgumentsInput"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.InvalidArgumentsInput"));
             return;
         }
         catch(Exception e)
         {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.UnknownError"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.UnknownError"));
             _plugin.Logger.LogError($"Command set kevlar failed due to:\n{e.StackTrace}");
             return;
         }
@@ -70,7 +66,7 @@ public class SetKevlar: IPluginModule
         TargetResult targets = info.GetArgTargetResult(1);
         
         if(!targets.Any()) {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetNotFound"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetNotFound"));
             return;
         }
 
@@ -91,7 +87,7 @@ public class SetKevlar: IPluginModule
 
             string targetName = TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1));
             
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("SetKevlar.Command.Notification.SetKevlar", targetName, targetKevlarAmount));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("SetKevlar.Command.Notification.SetKevlar", targetName, targetKevlarAmount));
         }
         else
         {
@@ -99,13 +95,13 @@ public class SetKevlar: IPluginModule
 
             if (!PlayerUtil.IsPlayerAlive(target))
             {
-                client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetIsDead", target.PlayerName));
+                info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetIsDead", target.PlayerName));
                 return;
             }
             
             target.PlayerPawn.Value!.ArmorValue = targetKevlarAmount;
             Utilities.SetStateChanged(target.PlayerPawn.Value!, "CCSPlayerPawn", "m_ArmorValue");
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("SetKevlar.Command.Notification.SetKevlar", target.PlayerName + "'s", targetKevlarAmount));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("SetKevlar.Command.Notification.SetKevlar", target.PlayerName + "'s", targetKevlarAmount));
         }
     }
 }

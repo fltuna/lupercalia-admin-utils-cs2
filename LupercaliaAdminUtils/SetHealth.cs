@@ -39,13 +39,9 @@ public class SetHealth: IPluginModule
     [RequiresPermissions(@"css/generic")]
     private void CommandSetHealth(CCSPlayerController? client, CommandInfo info)
     {
-        if (client == null)
-            return;
-        
-        
         if (info.ArgCount <= 2)
         {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("SetHealth.Command.Notification.Usage"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("SetHealth.Command.Notification.Usage"));
             return;
         }
         
@@ -57,26 +53,26 @@ public class SetHealth: IPluginModule
         }
         catch (FormatException _)
         {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.InvalidArgumentsInput"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.InvalidArgumentsInput"));
             return;
         }
         catch(Exception e)
         {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.UnknownError"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.UnknownError"));
             _plugin.Logger.LogError($"Command set health failed due to:\n{e.StackTrace}");
             return;
         }
 
         if (targetHealth <= 0)
         {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.InvalidValue", "1<"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.InvalidValue", "1<"));
             return;
         }
             
         TargetResult targets = info.GetArgTargetResult(1);
         
         if(!targets.Any()) {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetNotFound"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetNotFound"));
             return;
         }
 
@@ -98,7 +94,7 @@ public class SetHealth: IPluginModule
 
             string targetName = TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1));
             
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("SetHealth.Command.Notification.SetHealth", targetName, targetHealth));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("SetHealth.Command.Notification.SetHealth", targetName, targetHealth));
         }
         else
         {
@@ -106,14 +102,14 @@ public class SetHealth: IPluginModule
 
             if (!PlayerUtil.IsPlayerAlive(target))
             {
-                client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetIsDead", target.PlayerName));
+                info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetIsDead", target.PlayerName));
                 return;
             }
             
             target.PlayerPawn.Value!.Health = targetHealth;
             target.PlayerPawn.Value.MaxHealth = targetHealth;
             Utilities.SetStateChanged(target.PlayerPawn.Value!, "CBaseEntity", "m_iHealth");
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("SetHealth.Command.Notification.SetHealth", target.PlayerName + "'s", targetHealth));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("SetHealth.Command.Notification.SetHealth", target.PlayerName + "'s", targetHealth));
         }
     }
 }

@@ -33,10 +33,7 @@ public class TerminateRound: IPluginModule
     [RequiresPermissions(@"css/generic")]
     private void CommandTerminateRound(CCSPlayerController? client, CommandInfo info)
     {
-        if(client == null) 
-            return;
-            
-        client.PrintToChat(_plugin.LocalizeStringWithPrefix("TerminateRound.Command.Notification.Terminating"));
+        info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("TerminateRound.Command.Notification.Terminating"));
         Utilities.FindAllEntitiesByDesignerName<CCSGameRulesProxy>("cs_gamerules").First().GameRules?.TerminateRound(40.0F, RoundEndReason.RoundDraw);
     }
 }

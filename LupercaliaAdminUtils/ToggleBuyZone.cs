@@ -35,12 +35,9 @@ public class ToggleBuyZone: IPluginModule
     [RequiresPermissions(@"css/generic")]
     private void CommandSetBuyZone(CCSPlayerController? client, CommandInfo info)
     {
-        if (client == null)
-            return;
-        
         if (info.ArgCount <= 2)
         {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("ToggleBuyZone.Command.Notification.Usage"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("ToggleBuyZone.Command.Notification.Usage"));
             return;
         }
         
@@ -53,12 +50,12 @@ public class ToggleBuyZone: IPluginModule
         }
         catch (FormatException _)
         {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.InvalidValue", "0 or 1"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.InvalidValue", "0 or 1"));
             return;
         }
         catch(Exception e)
         {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.UnknownError"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.UnknownError"));
             _plugin.Logger.LogError($"Command toggle buy zone failed due to:\n{e.StackTrace}");
             return;
         }
@@ -66,7 +63,7 @@ public class ToggleBuyZone: IPluginModule
 
         if (treatedAsUserInBuyZone >= 2)
         {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.InvalidValue", "0 or 1"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.InvalidValue", "0 or 1"));
             return;
         }
 
@@ -74,7 +71,7 @@ public class ToggleBuyZone: IPluginModule
         TargetResult targets = info.GetArgTargetResult(1);
         
         if(!targets.Any()) {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetNotFound"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetNotFound"));
             return;
         }
 
@@ -97,11 +94,11 @@ public class ToggleBuyZone: IPluginModule
 
             if (playerBuyZoneStatus)
             {
-                client.PrintToChat(_plugin.LocalizeStringWithPrefix("ToggleBuyZone.Command.Notification.Enabled", targetName));
+                info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("ToggleBuyZone.Command.Notification.Enabled", targetName));
             }
             else
             {
-                client.PrintToChat(_plugin.LocalizeStringWithPrefix("ToggleBuyZone.Command.Notification.Disabled", targetName));
+                info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("ToggleBuyZone.Command.Notification.Disabled", targetName));
             }
         }
         else
@@ -111,7 +108,7 @@ public class ToggleBuyZone: IPluginModule
 
             if (!PlayerUtil.IsPlayerAlive(target))
             {
-                client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetIsDead", playerName));
+                info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetIsDead", playerName));
                 return;
             }
             
@@ -121,11 +118,11 @@ public class ToggleBuyZone: IPluginModule
             
             if (playerBuyZoneStatus)
             {
-                client.PrintToChat(_plugin.LocalizeStringWithPrefix("ToggleBuyZone.Command.Notification.Enabled", playerName));
+                info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("ToggleBuyZone.Command.Notification.Enabled", playerName));
             }
             else
             {
-                client.PrintToChat(_plugin.LocalizeStringWithPrefix("ToggleBuyZone.Command.Notification.Disabled", playerName));
+                info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("ToggleBuyZone.Command.Notification.Disabled", playerName));
             }
         }
     }
