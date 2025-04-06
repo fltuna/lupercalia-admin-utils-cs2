@@ -48,3 +48,14 @@ Respawns a player.
 Set player's cash.
 
 `css_cash <target> <amount>` or type `!cash <target> <amount>` in chat to use.
+
+
+### Set Team
+
+Set player's team.
+
+`css_team <target> <team num>` or type `!team <target> <team num>` in chat to use.
+
+1 = Spectator
+2 = Terrorist
+3 = CounterTerrorist
