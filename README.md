@@ -72,3 +72,18 @@ Set player's model.
 `css_getmodel <target>` or type `!getmodel <target>` in chat to use.
 
 If there is a multiple target found, Plugin will print the information to the console instead of chat. 
+
+
+### Get Users
+
+`css_users` or type `!users` in chat to use.
+
+It will print the these information about all clients in the server to client console.
+
+1. PlayerType: Bot, HLTV or Player
+2. IsAlive: Alive or Dead
+3. PlayerName: Player name, but when player name is longer than 32 characters, it will be cropped name is shown
+4. PlayerSlot: This slot number is useful for targeting players. (for instance: !hp #<slotNumber> 100)
+5. SteamID: Prints a SteamID64
+6. IpAddress: Only user who has a root role can see this information
+7. Ping: User's ping
