@@ -1,4 +1,5 @@
 ﻿using CounterStrikeSharp.API.Core;
+using CounterStrikeSharp.API.Modules.Utils;
 
 namespace LupercaliaAdminUtils.util;
 
@@ -40,5 +41,16 @@ public static class PlayerUtil
         
         client.PlayerPawn.Value.SetModel(modelPath);
         return true;
+    }
+
+
+    public static readonly string ServerConsoleName = $" {ChatColors.DarkRed}CONSOLE{ChatColors.Default}";
+
+    public static string GetPlayerName(CCSPlayerController? client)
+    {
+        if (client == null)
+            return ServerConsoleName;
+        
+        return client.PlayerName;
     }
 }

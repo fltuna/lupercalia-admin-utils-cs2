@@ -39,21 +39,20 @@ public class SetPlayerModel: IPluginModule
     [RequiresPermissions(@"css/generic")]
     private void CommandSetModel(CCSPlayerController? client, CommandInfo info)
     {
-        if (client == null)
-            return;
-        
         if (info.ArgCount <= 2)
         {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("SetPlayerModel.Command.Notification.Usage"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("SetPlayerModel.Command.Notification.Usage"));
             return;
         }
 
         string modelPath = info.GetArg(2);
         
+        string executorName = PlayerUtil.GetPlayerName(client);
+        
         TargetResult targets = info.GetArgTargetResult(1);
         
         if(!targets.Any()) {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetNotFound"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetNotFound"));
             return;
         }
 
@@ -70,14 +69,14 @@ public class SetPlayerModel: IPluginModule
 
             string targetName = TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1));
             
-            Server.PrintToChatAll(_plugin.LocalizeStringWithPrefix("SetPlayerModel.Command.Broadcast.SetModel", client.PlayerName, targetName, modelPath));
+            Server.PrintToChatAll(_plugin.LocalizeStringWithPrefix("SetPlayerModel.Command.Broadcast.SetModel", executorName, targetName, modelPath));
         }
         else
         {
             CCSPlayerController target = targets.First();
             
             PlayerUtil.SetPlayerModel(target, modelPath);
-            Server.PrintToChatAll(_plugin.LocalizeStringWithPrefix("SetPlayerModel.Command.Broadcast.SetModel", client.PlayerName, target.PlayerName, modelPath));
+            Server.PrintToChatAll(_plugin.LocalizeStringWithPrefix("SetPlayerModel.Command.Broadcast.SetModel", executorName, target.PlayerName, modelPath));
         }
     }
 

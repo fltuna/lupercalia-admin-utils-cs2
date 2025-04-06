@@ -36,13 +36,9 @@ public class SetCash: IPluginModule
     [RequiresPermissions(@"css/generic")]
     private void CommandSetCash(CCSPlayerController? client, CommandInfo info)
     {
-        if (client == null)
-            return;
-        
-        
         if (info.ArgCount <= 2)
         {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("SetCash.Command.Notification.Usage"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("SetCash.Command.Notification.Usage"));
             return;
         }
         
@@ -54,26 +50,26 @@ public class SetCash: IPluginModule
         }
         catch (FormatException _)
         {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.InvalidArgumentsInput"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.InvalidArgumentsInput"));
             return;
         }
         catch(Exception e)
         {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.UnknownError"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.UnknownError"));
             _plugin.Logger.LogError($"Command set cash failed due to:\n{e.StackTrace}");
             return;
         }
 
         if (targetCash <= 0)
         {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.InvalidValue", "1<"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.InvalidValue", "1<"));
             return;
         }
             
         TargetResult targets = info.GetArgTargetResult(1);
         
         if(!targets.Any()) {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetNotFound"));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetNotFound"));
             return;
         }
 
@@ -94,7 +90,7 @@ public class SetCash: IPluginModule
 
             string targetName = TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1));
             
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("SetCash.Command.Notification.SetCash", targetName, targetCash));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("SetCash.Command.Notification.SetCash", targetName, targetCash));
         }
         else
         {
@@ -102,13 +98,13 @@ public class SetCash: IPluginModule
 
             if (!PlayerUtil.IsPlayerAlive(target))
             {
-                client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetIsDead", target.PlayerName));
+                info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetIsDead", target.PlayerName));
                 return;
             }
             
             target.InGameMoneyServices!.Account = targetCash;
             Utilities.SetStateChanged(target, "CCSPlayerController", "m_pInGameMoneyServices");
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("SetCash.Command.Notification.SetCash", target.PlayerName + "'s", targetCash));
+            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("SetCash.Command.Notification.SetCash", target.PlayerName + "'s", targetCash));
         }
     }
 }
