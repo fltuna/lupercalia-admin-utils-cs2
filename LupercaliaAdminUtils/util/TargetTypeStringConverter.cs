@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using CounterStrikeSharp.API.Core;
 
 namespace LupercaliaAdminUtils.util;
 
@@ -45,6 +44,6 @@ public static class TargetTypeStringConverter
                 throw new InvalidOperationException($"Unknown target type: {targetString}");
         }
         
-        return LupercaliaAdminUtils.GetInstance().Localizer[resultBuilder.ToString()];
+        return resultBuilder.ToString();
     }
 }

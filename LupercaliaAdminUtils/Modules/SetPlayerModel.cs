@@ -3,36 +3,27 @@ using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Modules.Admin;
 using CounterStrikeSharp.API.Modules.Commands;
 using CounterStrikeSharp.API.Modules.Commands.Targeting;
-using CounterStrikeSharp.API.Modules.Utils;
-using LupercaliaAdminUtils.model;
 using LupercaliaAdminUtils.util;
-using Microsoft.Extensions.Logging;
+using TNCSSPluginFoundation.Models.Plugin;
+using TNCSSPluginFoundation.Utils.Entity;
 
-namespace LupercaliaAdminUtils;
+namespace LupercaliaAdminUtils.Modules;
 
-public class SetPlayerModel: IPluginModule
+public class SetPlayerModel(IServiceProvider serviceProvider) : PluginModuleBase(serviceProvider)
 {
+    public override string PluginModuleName => "SetPlayerModel";
+    public override string ModuleChatPrefix => "[SetPlayerModel]";
 
-    public string PluginModuleName => "SetPlayerModel";
-    
-    private readonly LupercaliaAdminUtils _plugin;
-
-    public SetPlayerModel(LupercaliaAdminUtils plugin)
+    protected override void OnInitialize()
     {
-        _plugin = plugin;
-        
-        _plugin.AddCommand("css_setmodel", "Set player's model", CommandSetModel);
-        _plugin.AddCommand("css_getmodel", "Get player's current model", CommandGetModel);
-    }
-    
-    public void AllPluginsLoaded()
-    {
+        Plugin.AddCommand("css_setmodel", "Set player's model", CommandSetModel);
+        Plugin.AddCommand("css_getmodel", "Get player's current model", CommandGetModel);
     }
 
-    public void UnloadModule()
+    protected override void OnUnloadModule()
     {
-        _plugin.RemoveCommand("css_setmodel", CommandSetModel);
-        _plugin.RemoveCommand("css_getmodel", CommandGetModel);
+        Plugin.RemoveCommand("css_setmodel", CommandSetModel);
+        Plugin.RemoveCommand("css_getmodel", CommandGetModel);
     }
     
 
@@ -41,7 +32,7 @@ public class SetPlayerModel: IPluginModule
     {
         if (info.ArgCount <= 2)
         {
-            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("SetPlayerModel.Command.Notification.Usage"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix("SetPlayerModel.Command.Notification.Usage"));
             return;
         }
 
@@ -52,7 +43,7 @@ public class SetPlayerModel: IPluginModule
         TargetResult targets = info.GetArgTargetResult(1);
         
         if(!targets.Any()) {
-            info.ReplyToCommand(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetNotFound"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.TargetNotFound"));
             return;
         }
 
@@ -69,14 +60,14 @@ public class SetPlayerModel: IPluginModule
 
             string targetName = TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1));
             
-            Server.PrintToChatAll(_plugin.LocalizeStringWithPrefix("SetPlayerModel.Command.Broadcast.SetModel", executorName, targetName, modelPath));
+            Server.PrintToChatAll(LocalizeWithPluginPrefix("SetPlayerModel.Command.Broadcast.SetModel", executorName, targetName, modelPath));
         }
         else
         {
             CCSPlayerController target = targets.First();
             
             PlayerUtil.SetPlayerModel(target, modelPath);
-            Server.PrintToChatAll(_plugin.LocalizeStringWithPrefix("SetPlayerModel.Command.Broadcast.SetModel", executorName, target.PlayerName, modelPath));
+            Server.PrintToChatAll(LocalizeWithPluginPrefix("SetPlayerModel.Command.Broadcast.SetModel", executorName, target.PlayerName, modelPath));
         }
     }
 
@@ -89,7 +80,7 @@ public class SetPlayerModel: IPluginModule
         
         if (info.ArgCount <= 1)
         {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("GetPlayerModel.Command.Notification.Usage"));
+            client.PrintToChat(LocalizeWithPluginPrefix("GetPlayerModel.Command.Notification.Usage"));
             return;
         }
         
@@ -97,7 +88,7 @@ public class SetPlayerModel: IPluginModule
         TargetResult targets = info.GetArgTargetResult(1);
         
         if(!targets.Any()) {
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.TargetNotFound"));
+            client.PrintToChat(LocalizeWithPluginPrefix("General.Command.Notification.TargetNotFound"));
             return;
         }
 
@@ -118,7 +109,7 @@ public class SetPlayerModel: IPluginModule
                 client.PrintToConsole($"{target.PlayerName}\t {PlayerUtil.GetPlayerModel(target)}");
             }
             
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.SeeClientConsoleOutput"));
+            client.PrintToChat(LocalizeWithPluginPrefix("General.Command.Notification.SeeClientConsoleOutput"));
         }
         else
         {
@@ -126,7 +117,7 @@ public class SetPlayerModel: IPluginModule
 
             string targetPlayerModel = PlayerUtil.GetPlayerModel(target);
             Server.PrintToChatAll(targetPlayerModel);
-            client.PrintToChat(_plugin.LocalizeStringWithPrefix("GetPlayerModel.Command.Notification.PlayerModel", target.PlayerName, targetPlayerModel));
+            client.PrintToChat(LocalizeWithPluginPrefix("GetPlayerModel.Command.Notification.PlayerModel", target.PlayerName, targetPlayerModel));
         }
     }
 }
