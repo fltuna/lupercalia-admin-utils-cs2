@@ -3,32 +3,25 @@ using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Modules.Admin;
 using CounterStrikeSharp.API.Modules.Commands;
 using CounterStrikeSharp.API.Modules.Entities;
-using LupercaliaAdminUtils.model;
 using LupercaliaAdminUtils.util;
+using TNCSSPluginFoundation.Models.Plugin;
+using TNCSSPluginFoundation.Utils.Entity;
 
-namespace LupercaliaAdminUtils;
+namespace LupercaliaAdminUtils.Modules;
 
-public class UserList: IPluginModule
+public class UserList(IServiceProvider serviceProvider) : PluginModuleBase(serviceProvider)
 {
+    public override string PluginModuleName => "UserList";
+    public override string ModuleChatPrefix => "[UserList]";
 
-    public string PluginModuleName => "UserList";
-    
-    private readonly LupercaliaAdminUtils _plugin;
-
-    public UserList(LupercaliaAdminUtils plugin)
+    protected override void OnInitialize()
     {
-        _plugin = plugin;
-        
-        _plugin.AddCommand("css_users", "Get all of player information from current server.", CommandUsers);
-    }
-    
-    public void AllPluginsLoaded()
-    {
+        Plugin.AddCommand("css_users", "Get all of player information from current server.", CommandUsers);
     }
 
-    public void UnloadModule()
+    protected override void OnUnloadModule()
     {
-        _plugin.RemoveCommand("css_users", CommandUsers);
+        Plugin.RemoveCommand("css_users", CommandUsers);
     }
     
     private const int WidthPlayerType = 8;
@@ -111,7 +104,7 @@ public class UserList: IPluginModule
             }
         }
         
-        client.PrintToChat(_plugin.LocalizeStringWithPrefix("General.Command.Notification.SeeClientConsoleOutput"));
+        client.PrintToChat(LocalizeWithPluginPrefix("General.Command.Notification.SeeClientConsoleOutput"));
     }
 
 

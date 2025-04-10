@@ -2,6 +2,11 @@
 
 This plugin provides convenient command for server administration.
 
+#  Requirements
+
+You need install these to plugin work:
+- [TNCSSPluginFoundation](https://github.com/fltuna/TNCSSPluginFoundation)
+
 ## Features
 
 ### Terminate round
