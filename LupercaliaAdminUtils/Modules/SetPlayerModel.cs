@@ -37,6 +37,12 @@ public class SetPlayerModel(IServiceProvider serviceProvider) : PluginModuleBase
         }
 
         string modelPath = info.GetArg(2);
+
+        if (!modelPath.EndsWith(".vmdl"))
+        {
+            info.ReplyToCommand(LocalizeWithPluginPrefix("SetPlayerModel.Command.Notification.PathShouldEndWithVmdl"));
+            return;
+        }
         
         string executorName = PlayerUtil.GetPlayerName(client);
         
