@@ -26,7 +26,7 @@ public class TerminateRound(IServiceProvider serviceProvider) : PluginModuleBase
     [RequiresPermissions(@"css/generic")]
     private void CommandTerminateRound(CCSPlayerController? client, CommandInfo info)
     {
-        info.ReplyToCommand(LocalizeWithPluginPrefix("TerminateRound.Command.Notification.Terminating"));
+        PrintLocalizedChatToAll("TerminateRound.Command.Notification.Terminating");
         GameRulesUtil.TerminateRound(40.0F, RoundEndReason.RoundDraw);
     }
 }
