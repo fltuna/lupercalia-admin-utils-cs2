@@ -33,26 +33,12 @@ public class ToggleBuyZone(IServiceProvider serviceProvider) : PluginModuleBase(
             info.ReplyToCommand(LocalizeWithPluginPrefix("ToggleBuyZone.Command.Notification.Usage"));
             return;
         }
-        
-        
-        byte treatedAsUserInBuyZone = 0;
 
-        try
+        if (!byte.TryParse(info.GetArg(2), out byte treatedAsUserInBuyZone))
         {
-            treatedAsUserInBuyZone = Convert.ToByte(info.GetArg(2));
-        }
-        catch (FormatException)
-        {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.InvalidValue", "0 or 1"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.InvalidArgumentsInput"));
             return;
         }
-        catch(Exception e)
-        {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.UnknownError"));
-            Plugin.Logger.LogError($"Command toggle buy zone failed due to:\n{e.StackTrace}");
-            return;
-        }
-
 
         if (treatedAsUserInBuyZone >= 2)
         {

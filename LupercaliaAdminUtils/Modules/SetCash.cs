@@ -34,22 +34,10 @@ public class SetCash(IServiceProvider serviceProvider) : PluginModuleBase(servic
             info.ReplyToCommand(LocalizeWithPluginPrefix("SetCash.Command.Notification.Usage"));
             return;
         }
-        
-        int targetCash = 0;
 
-        try
-        {
-            targetCash = Convert.ToInt32(info.GetArg(2));
-        }
-        catch (FormatException)
+        if (!int.TryParse(info.GetArg(2), out int targetCash))
         {
             info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.InvalidArgumentsInput"));
-            return;
-        }
-        catch(Exception e)
-        {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.UnknownError"));
-            Plugin.Logger.LogError($"Command set cash failed due to:\n{e.StackTrace}");
             return;
         }
 

@@ -35,19 +35,9 @@ public class ExtendRoundTime(IServiceProvider serviceProvider) : PluginModuleBas
             return;
         }
 
-        int extendTime = 0;
-
-        try
-        {
-            extendTime = Convert.ToInt32(info.GetArg(1));
-        } catch (FormatException)
+        if (!int.TryParse(info.GetArg(1), out var extendTime))
         {
             info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.InvalidArgumentsInput"));
-            return;
-        } catch(Exception e)
-        {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.UnknownError"));
-            Plugin.Logger.LogError($"Command extend round time failed due to:\n{e.StackTrace}");
             return;
         }
         
