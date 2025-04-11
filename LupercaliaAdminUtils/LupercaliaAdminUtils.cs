@@ -12,7 +12,7 @@ public class LupercaliaAdminUtils: TncssPluginBase
 {
 
     public override string ModuleName => "Lupercalia Admin Utils";
-    public override string ModuleVersion => "0.0.1";
+    public override string ModuleVersion => "0.1.0";
     public override string ModuleAuthor => "faketuna";
     public override string ModuleDescription => "Provides convenient administration feature.";
 
