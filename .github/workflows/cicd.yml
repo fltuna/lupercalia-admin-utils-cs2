@@ -53,27 +53,21 @@ jobs:
           mkdir artifacts
           Copy-Item -Path "LupercaliaAdminUtils\bin\Release\*\LupercaliaAdminUtils.dll" -Destination "artifacts\LupercaliaAdminUtils.dll" -Force
           Copy-Item -Path "lang\" -Destination "artifacts\lang\" -Recurse -Force
+        
+      - name: NativeVoteAPI Download from GitHub
+        run: Invoke-WebRequest https://github.com/fltuna/NativeVoteAPI-CS2/releases/latest/download/NativeVoteAPI.zip -OutFile NativeVoteAPI.zip
 
-      - name: [NativeVoteAPI] Download from GitHub
-        run: |
-          Invoke-WebRequest https://github.com/fltuna/NativeVoteAPI-CS2/releases/latest/download/NativeVoteAPI.zip -OutFile NativeVoteAPI.zip
+      - name: NativeVoteAPI Extract ZIP and put into artifacts
+        run: Expand-Archive -Path NativeVoteAPI.zip -DestinationPath artifacts\
 
-      - name: [NativeVoteAPI] Extract ZIP and put into artifacts
-        run: |
-          Expand-Archive -Path NativeVoteAPI.zip -DestinationPath artifacts\
+      - name: TNCSSPluginFoundation Download from GitHub
+        run: Invoke-WebRequest https://github.com/fltuna/TNCSSPluginFoundation/releases/latest/download/TNCSSPluginFoundation.zip -OutFile TNCSSPluginFoundation.zip
 
-
-      - name: [TNCSSPluginFoundation] Download from GitHub
-        run: |
-          Invoke-WebRequest https://github.com/fltuna/TNCSSPluginFoundation/releases/latest/download/TNCSSPluginFoundation.zip -OutFile TNCSSPluginFoundation.zip
-
-      - name: [TNCSSPluginFoundation] Extract ZIP and put into artifacts
-        run: |
-          Expand-Archive -Path TNCSSPluginFoundation.zip -DestinationPath artifacts\
+      - name: TNCSSPluginFoundation Extract ZIP and put into artifacts
+        run: Expand-Archive -Path TNCSSPluginFoundation.zip -DestinationPath artifacts\
 
       - name: Compress artifacts
-        run:
-          Compress-Archive -Path artifacts/* -Destination LupercaliaAdminUtils.zip
+        run: Compress-Archive -Path artifacts/* -Destination LupercaliaAdminUtils.zip
 
       - name: Upload release assets
         uses: actions/upload-artifact@v4
