@@ -38,5 +38,7 @@
     "SetPlayerName.Command.Notification.Usage": "Usage: !setname <target> <name>",
     "SetPlayerName.Command.Broadcast.NameChanged": "{lime}{0}{default} changed {green}{1}{default}'s name to {green}{2}",
     "SetTeamScore.Command.Notification.Usage": "Usage: !setscore <teamNum> <score>",
-    "SetTeamScore.Command.Broadcast.ScoreChanged": "{lime}{0}{default} changed {green}{1}{default} team score to {green}{2}"
+    "SetTeamScore.Command.Broadcast.ScoreChanged": "{lime}{0}{default} changed {green}{1}{default} team score to {green}{2}",
+    "SetTeamName.Command.Notification.Usage": "Usage: !teamname <teamNum> <name>",
+    "SetTeamName.Command.Broadcast.NameChanged": "{lime}{0}{default} changed {green}{1}{default} team name to {green}{2}"
 }
