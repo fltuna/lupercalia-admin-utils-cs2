@@ -1,0 +1,90 @@
+﻿using CounterStrikeSharp.API;
+using CounterStrikeSharp.API.Core;
+using CounterStrikeSharp.API.Modules.Admin;
+using CounterStrikeSharp.API.Modules.Commands;
+using CounterStrikeSharp.API.Modules.Commands.Targeting;
+using CounterStrikeSharp.API.Modules.Utils;
+using LupercaliaAdminUtils.util;
+using Microsoft.Extensions.Logging;
+using TNCSSPluginFoundation.Models.Plugin;
+using TNCSSPluginFoundation.Utils.Entity;
+
+namespace LupercaliaAdminUtils.Modules;
+
+public class SetTeamScore(IServiceProvider serviceProvider) : PluginModuleBase(serviceProvider)
+{
+    public override string PluginModuleName => "TeamScore";
+    public override string ModuleChatPrefix => "[TeamScore]";
+
+    protected override void OnInitialize()
+    {
+        Plugin.AddCommand("css_teamscore", "Set team's score", CommandSetTeam);
+    }
+
+    protected override void OnUnloadModule()
+    {
+        Plugin.RemoveCommand("css_teamscore", CommandSetTeam);
+    }
+    
+
+    [RequiresPermissions(@"css/generic")]
+    private void CommandSetTeam(CCSPlayerController? client, CommandInfo info)
+    {
+        if (info.ArgCount <= 2)
+        {
+            info.ReplyToCommand(LocalizeWithPluginPrefix("SetTeamScore.Command.Notification.Usage"));
+            return;
+        }
+        
+        
+        int teamNumberToModify = 0;
+
+        try
+        {
+            teamNumberToModify = Convert.ToInt32(info.GetArg(1));
+        }
+        catch (FormatException)
+        {
+            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.InvalidArgumentsInput"));
+            return;
+        }
+        catch(Exception e)
+        {
+            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.UnknownError"));
+            Plugin.Logger.LogError($"Command set team failed due to:\n{e.StackTrace}");
+            return;
+        }
+
+        if (teamNumberToModify is < 2 or > 3)
+        {
+            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.InvalidValue", "2~3"));
+            return;
+        }
+
+        if (!int.TryParse(info.ArgByIndex(2), out int score))
+        {
+            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.InvalidArgumentsInput"));
+            return;
+        }
+        
+
+        CsTeam targetTeam = (CsTeam) teamNumberToModify;
+        
+        string executorName = PlayerUtil.GetPlayerName(client);
+        
+        CsTeamUtil.SetTeamScore(targetTeam, score);
+        Server.PrintToChatAll(LocalizeWithPluginPrefix("SetTeamScore.Command.Broadcast.ScoreChanged", executorName, targetTeam, score));
+    }
+
+    
+    // This is the detour method for player is not move team correctly
+    // When player is moved from spectator sometimes player is stuck at world origin.
+    private void MovePlayerFromSpectator(CCSPlayerController client, CsTeam targetTeam)
+    {
+        PlayerUtil.SetPlayerTeam(client, targetTeam);
+        client.Respawn();
+        client.CommitSuicide(false, true);
+        PlayerUtil.SetPlayerTeam(client, CsTeam.Spectator);
+        PlayerUtil.SetPlayerTeam(client, targetTeam);
+    }
+}
