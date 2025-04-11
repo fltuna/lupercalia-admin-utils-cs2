@@ -1,6 +1,9 @@
 ﻿using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Modules.Utils;
 using LupercaliaAdminUtils.Modules;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using NativeVoteAPI.API;
 using TNCSSPluginFoundation;
 
 namespace LupercaliaAdminUtils;
@@ -34,5 +37,23 @@ public class LupercaliaAdminUtils: TncssPluginBase
         RegisterModule<SetTeamName>();
         RegisterModule<SetPlayerClanTag>();
         RegisterModule<ExtendTimeLimit>();
+    }
+
+    protected override void LateRegisterPluginServices(IServiceCollection serviceCollection, IServiceProvider provider)
+    {
+        INativeVoteApi? nativeVoteApi = null;
+        try
+        {
+            nativeVoteApi = INativeVoteApi.Capability.Get();
+        }
+        catch (Exception)
+        {
+            Logger.LogError("Native vote API not found! some modules may not work properly!!!!");
+        }
+
+        if (nativeVoteApi != null)
+        {
+            serviceCollection.AddSingleton<INativeVoteApi>(nativeVoteApi);
+        }
     }
 }
