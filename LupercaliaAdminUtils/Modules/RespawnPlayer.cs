@@ -59,7 +59,7 @@ public class RespawnPlayer(IServiceProvider serviceProvider) : PluginModuleBase(
                 target.Respawn();
             }
 
-            string targetName = TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1));
+            string targetName = LocalizeString(TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
             
             Server.PrintToChatAll(LocalizeWithPluginPrefix("Respawn.Command.Broadcast.PlayerRespawned", executorName, targetName));
         }

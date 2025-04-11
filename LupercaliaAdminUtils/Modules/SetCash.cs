@@ -80,7 +80,7 @@ public class SetCash(IServiceProvider serviceProvider) : PluginModuleBase(servic
                 PlayerUtil.SetPlayerMoney(target, targetCash);
             }
 
-            string targetName = TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1));
+            string targetName = LocalizeString(TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
             
             info.ReplyToCommand(LocalizeWithPluginPrefix("SetCash.Command.Notification.SetCash", targetName, targetCash));
         }

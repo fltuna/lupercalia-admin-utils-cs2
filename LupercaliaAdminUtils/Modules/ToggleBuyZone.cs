@@ -82,7 +82,7 @@ public class ToggleBuyZone(IServiceProvider serviceProvider) : PluginModuleBase(
                 PlayerUtil.SetPlayerBuyZoneStatus(target, playerBuyZoneStatus);
             }
 
-            string targetName = TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1));
+            string targetName = LocalizeString(TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
 
             if (playerBuyZoneStatus)
             {
