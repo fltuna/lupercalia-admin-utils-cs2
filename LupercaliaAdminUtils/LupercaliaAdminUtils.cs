@@ -37,6 +37,7 @@ public class LupercaliaAdminUtils: TncssPluginBase
         RegisterModule<SetTeamName>();
         RegisterModule<SetPlayerClanTag>();
         RegisterModule<ExtendTimeLimit>();
+        RegisterModule<GiveWeapon>();
     }
 
     protected override void LateRegisterPluginServices(IServiceCollection serviceCollection, IServiceProvider provider)
