@@ -32,5 +32,6 @@ public class LupercaliaAdminUtils: TncssPluginBase
         RegisterModule<SetPlayerName>();
         RegisterModule<SetTeamScore>();
         RegisterModule<SetTeamName>();
+        RegisterModule<SetPlayerClanTag>();
     }
 }
