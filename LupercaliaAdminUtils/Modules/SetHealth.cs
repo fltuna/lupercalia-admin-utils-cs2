@@ -36,22 +36,10 @@ public class SetHealth(IServiceProvider serviceProvider) : PluginModuleBase(serv
             info.ReplyToCommand(LocalizeWithPluginPrefix("SetHealth.Command.Notification.Usage"));
             return;
         }
-        
-        int targetHealth = 0;
 
-        try
-        {
-            targetHealth = Convert.ToInt32(info.GetArg(2));
-        }
-        catch (FormatException)
+        if (!int.TryParse(info.GetArg(2), out int targetHealth))
         {
             info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.InvalidArgumentsInput"));
-            return;
-        }
-        catch(Exception e)
-        {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.UnknownError"));
-            Plugin.Logger.LogError($"Command set health failed due to:\n{e.StackTrace}");
             return;
         }
 

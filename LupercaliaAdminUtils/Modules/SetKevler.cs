@@ -38,33 +38,21 @@ public class SetKevlar(IServiceProvider serviceProvider) : PluginModuleBase(serv
             return;
         }
         
-        int targetKevlarAmount = 0;
-        int hasHelmet = -1;
-        int hasHeavyArmor = -1;
 
-        try
-        {
-            targetKevlarAmount = Convert.ToInt32(info.GetArg(2));
-            if (info.ArgCount >= 4)
-            {
-                hasHelmet = Convert.ToInt32(info.GetArg(3));
-            }
-
-            if (info.ArgCount >= 5)
-            {
-                hasHeavyArmor = Convert.ToInt32(info.GetArg(4));
-            }
-        }
-        catch (FormatException)
+        if (!int.TryParse(info.GetArg(2), out int targetKevlarAmount))
         {
             info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.InvalidArgumentsInput"));
             return;
         }
-        catch(Exception e)
+
+        if (!int.TryParse(info.GetArg(3), out int hasHelmet))
         {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.UnknownError"));
-            Plugin.Logger.LogError($"Command set kevlar failed due to:\n{e.StackTrace}");
-            return;
+            hasHelmet = -1;
+        }
+
+        if (!int.TryParse(info.GetArg(4), out int hasHeavyArmor))
+        {
+            hasHeavyArmor = -1;
         }
         
             

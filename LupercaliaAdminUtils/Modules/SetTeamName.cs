@@ -35,23 +35,10 @@ public class SetTeamName(IServiceProvider serviceProvider) : PluginModuleBase(se
             info.ReplyToCommand(LocalizeWithPluginPrefix("SetTeamName.Command.Notification.Usage"));
             return;
         }
-        
-        
-        int teamNumberToModify = 0;
 
-        try
-        {
-            teamNumberToModify = Convert.ToInt32(info.GetArg(1));
-        }
-        catch (FormatException)
+        if (!int.TryParse(info.GetArg(1), out int teamNumberToModify))
         {
             info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.InvalidArgumentsInput"));
-            return;
-        }
-        catch(Exception e)
-        {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.UnknownError"));
-            Plugin.Logger.LogError($"Command set team failed due to:\n{e.StackTrace}");
             return;
         }
 
