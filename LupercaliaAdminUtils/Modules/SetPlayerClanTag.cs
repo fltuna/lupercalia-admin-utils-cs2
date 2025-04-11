@@ -59,14 +59,14 @@ public class SetPlayerClanTag(IServiceProvider serviceProvider) : PluginModuleBa
 
             string targetName = LocalizeString(TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
             
-            info.ReplyToCommand(LocalizeWithPluginPrefix("SetPlayerClanTag.Command.Broadcast.TagChanged", executorName, targetName, clanTag));
+            PrintLocalizedChatToAll("SetPlayerClanTag.Command.Broadcast.TagChanged", executorName, targetName, clanTag);
         }
         else
         {
             CCSPlayerController target = targets.First();
 
             PlayerUtil.SetPlayerClanTag(target, clanTag);
-            info.ReplyToCommand(LocalizeWithPluginPrefix("SetPlayerClanTag.Command.Broadcast.TagChanged", executorName, target.PlayerName, clanTag));
+            PrintLocalizedChatToAll("SetPlayerClanTag.Command.Broadcast.TagChanged", executorName, target.PlayerName, clanTag);
         }
     }
 }

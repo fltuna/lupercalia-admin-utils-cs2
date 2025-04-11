@@ -56,6 +56,7 @@ public class SetHealth(IServiceProvider serviceProvider) : PluginModuleBase(serv
             return;
         }
 
+        string executorName = PlayerUtil.GetPlayerName(client);
         bool hasTypedTargets = Target.TargetTypeMap.ContainsKey(info.GetArg(1));
 
         if (hasTypedTargets && targets.Count() >= 2)
@@ -73,7 +74,7 @@ public class SetHealth(IServiceProvider serviceProvider) : PluginModuleBase(serv
 
             string targetName = LocalizeString(TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
             
-            info.ReplyToCommand(LocalizeWithPluginPrefix("SetHealth.Command.Notification.SetHealth", targetName, targetHealth));
+            PrintLocalizedChatToAll("SetHealth.Command.Broadcast.SetHealth", executorName, targetName, targetHealth);
         }
         else
         {
@@ -87,7 +88,7 @@ public class SetHealth(IServiceProvider serviceProvider) : PluginModuleBase(serv
             
             PlayerUtil.SetPlayerHealth(target, targetHealth);
             PlayerUtil.SetPlayerMaxHealth(target, targetHealth);
-            info.ReplyToCommand(LocalizeWithPluginPrefix("SetHealth.Command.Notification.SetHealth", target.PlayerName, targetHealth));
+            PrintLocalizedChatToAll("SetHealth.Command.Broadcast.SetHealth", executorName, target.PlayerName, targetHealth);
         }
     }
 }

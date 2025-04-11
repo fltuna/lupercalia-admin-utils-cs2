@@ -45,6 +45,8 @@ public class ExtendRoundTime(IServiceProvider serviceProvider) : PluginModuleBas
         int newTime = roundTimeBefore + extendTime;
         GameRulesUtil.SetRoundTime(newTime);
 
-        info.ReplyToCommand(LocalizeWithPluginPrefix("ExtendRoundTime.Command.Notification.SuccessfullyExtended", newTime, roundTimeBefore));
+        string executorName = PlayerUtil.GetPlayerName(client);
+
+        PrintLocalizedChatToAll("ExtendRoundTime.Command.Broadcast.SuccessfullyExtended", executorName, newTime, roundTimeBefore);
     }
 }

@@ -54,6 +54,7 @@ public class SetCash(IServiceProvider serviceProvider) : PluginModuleBase(servic
             return;
         }
 
+        string executorName = PlayerUtil.GetPlayerName(client);
         bool hasTypedTargets = Target.TargetTypeMap.ContainsKey(info.GetArg(1));
 
         if (hasTypedTargets && targets.Count() >= 2)
@@ -70,7 +71,7 @@ public class SetCash(IServiceProvider serviceProvider) : PluginModuleBase(servic
 
             string targetName = LocalizeString(TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
             
-            info.ReplyToCommand(LocalizeWithPluginPrefix("SetCash.Command.Notification.SetCash", targetName, targetCash));
+            PrintLocalizedChatToAll("SetCash.Command.Broadcast.SetCash", executorName, targetName, targetCash);
         }
         else
         {
@@ -83,7 +84,7 @@ public class SetCash(IServiceProvider serviceProvider) : PluginModuleBase(servic
             }
             
             PlayerUtil.SetPlayerMoney(target, targetCash);
-            info.ReplyToCommand(LocalizeWithPluginPrefix("SetCash.Command.Notification.SetCash", target.PlayerName, targetCash));
+            PrintLocalizedChatToAll("SetCash.Command.Broadcast.SetCash", executorName, target.PlayerName, targetCash);
         }
     }
 }

@@ -55,7 +55,7 @@ public class SetTeamName(IServiceProvider serviceProvider) : PluginModuleBase(se
         string executorName = PlayerUtil.GetPlayerName(client);
 
         CsTeamUtil.SetTeamName(targetTeam, newTeamName);
-        Server.PrintToChatAll(LocalizeWithPluginPrefix("SetTeamName.Command.Broadcast.NameChanged", executorName, targetTeam, newTeamName));
+        PrintLocalizedChatToAll("SetTeamName.Command.Broadcast.NameChanged", executorName, targetTeam, newTeamName);
     }
 
     

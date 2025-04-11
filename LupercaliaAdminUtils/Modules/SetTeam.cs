@@ -84,7 +84,7 @@ public class SetTeam(IServiceProvider serviceProvider) : PluginModuleBase(servic
 
             string targetName = LocalizeString(TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
             
-            Server.PrintToChatAll(LocalizeWithPluginPrefix("SetTeam.Command.Broadcast.SetTeam", executorName, targetName, targetTeam));
+            PrintLocalizedChatToAll("SetTeam.Command.Broadcast.SetTeam", executorName, targetName, targetTeam);
         }
         else
         {
@@ -101,7 +101,7 @@ public class SetTeam(IServiceProvider serviceProvider) : PluginModuleBase(servic
             }
             
             PlayerUtil.SetPlayerTeam(target, targetTeam);
-            Server.PrintToChatAll(LocalizeWithPluginPrefix("SetTeam.Command.Broadcast.SetTeam", executorName, target.PlayerName, targetTeam));
+            PrintLocalizedChatToAll("SetTeam.Command.Broadcast.SetTeam", executorName, target.PlayerName, targetTeam);
         }
     }
 

@@ -63,6 +63,7 @@ public class SetKevlar(IServiceProvider serviceProvider) : PluginModuleBase(serv
             return;
         }
 
+        string executorName = PlayerUtil.GetPlayerName(client);
         bool hasTypedTargets = Target.TargetTypeMap.ContainsKey(info.GetArg(1));
 
         if (hasTypedTargets && targets.Count() >= 2)
@@ -84,7 +85,14 @@ public class SetKevlar(IServiceProvider serviceProvider) : PluginModuleBase(serv
 
             string targetName = LocalizeString(TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
             
-            info.ReplyToCommand(LocalizeWithPluginPrefix("SetKevlar.Command.Notification.SetKevlar", targetName, targetKevlarAmount, Convert.ToBoolean(hasHelmet), Convert.ToBoolean(hasHeavyArmor)));
+            
+
+            var helmetAll = hasHelmet != -1 && Convert.ToBoolean(hasHelmet);
+            var heavyArmorAll = hasHeavyArmor != -1 && Convert.ToBoolean(hasHeavyArmor);
+            string helmetStatusString = helmetAll ? LocalizeString("General.Name.True") : LocalizeString("General.Name.False");
+            string heavyArmorStatusString = heavyArmorAll ? LocalizeString("General.Name.True") : LocalizeString("General.Name.False");
+            
+            PrintLocalizedChatToAll("SetKevlar.Command.Broadcast.SetKevlar", executorName, targetName, targetKevlarAmount, helmetStatusString, heavyArmorStatusString);
         }
         else
         {
@@ -103,7 +111,9 @@ public class SetKevlar(IServiceProvider serviceProvider) : PluginModuleBase(serv
             var heavyArmor = hasHeavyArmor == -1 ? service.HasHeavyArmor : Convert.ToBoolean(hasHeavyArmor);
 
             PlayerUtil.SetPlayerArmor(target, targetKevlarAmount, helmet, heavyArmor);
-            info.ReplyToCommand(LocalizeWithPluginPrefix("SetKevlar.Command.Notification.SetKevlar", target.PlayerName, targetKevlarAmount, helmet, heavyArmor));
+            string helmetStatusString = helmet ? LocalizeString("General.Name.True") : LocalizeString("General.Name.False");
+            string heavyArmorStatusString = heavyArmor ? LocalizeString("General.Name.True") : LocalizeString("General.Name.False");
+            PrintLocalizedChatToAll("SetKevlar.Command.Broadcast.SetKevlar", executorName, target.PlayerName, targetKevlarAmount, helmetStatusString, heavyArmorStatusString);
         }
     }
 }
