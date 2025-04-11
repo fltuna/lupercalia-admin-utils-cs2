@@ -116,7 +116,10 @@ public class SetPlayerModel(IServiceProvider serviceProvider) : PluginModuleBase
             CCSPlayerController target = targets.First();
 
             string targetPlayerModel = PlayerUtil.GetPlayerModel(target);
-            Server.PrintToChatAll(targetPlayerModel);
+            client.PrintToConsole("=PLAYER MODEL INFORMATION=");
+            client.PrintToConsole("User\t ModelName");
+            client.PrintToConsole("-------------------------------");
+            client.PrintToConsole($"{target.PlayerName}\t {PlayerUtil.GetPlayerModel(target)}");
             client.PrintToChat(LocalizeWithPluginPrefix("GetPlayerModel.Command.Notification.PlayerModel", target.PlayerName, targetPlayerModel));
         }
     }

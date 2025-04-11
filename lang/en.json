@@ -44,7 +44,7 @@
     "SetPlayerModel.Command.Notification.Usage": "Usage: !setmodel <target> <modelPath>",
     "SetPlayerModel.Command.Broadcast.SetModel": "{lime}{0}{default} set {lime}{1}{default}'s model to {green}{2}",
     "GetPlayerModel.Command.Notification.Usage": "Usage: !getmodel <target>",
-    "GetPlayerModel.Command.Notification.PlayerModel": "{lime}{0}{default} is using {green}{1}",
+    "GetPlayerModel.Command.Notification.PlayerModel": "{lime}{0}{default} is using {green}{1}{default} Also, You can copy text from console.",
     "SetPlayerName.Command.Notification.Usage": "Usage: !setname <target> <name>",
     "SetPlayerName.Command.Broadcast.NameChanged": "{lime}{0}{default} changed {green}{1}{default}'s name to {green}{2}",
     "SetTeamScore.Command.Notification.Usage": "Usage: !teamscore <teamNum> <score>",
