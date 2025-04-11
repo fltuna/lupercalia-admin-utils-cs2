@@ -43,6 +43,7 @@
     "ToggleBuyZone.Command.Notification.Usage": "Usage: !buyzone <target> <0|1>",
     "ToggleBuyZone.Command.Broadcast.SetStatus": "Admin {green}{0}{default} set {lime}{1}{default}'s BuyZone status to {lime}{2}",
     "SetPlayerModel.Command.Notification.Usage": "Usage: !setmodel <target> <modelPath>",
+    "SetPlayerModel.Command.Notification.PathShouldEndWithVmdl": "{darkred}The path should be end with {green} .vmdl{darkred}. Otherwise all clients in the server will crash!",
     "SetPlayerModel.Command.Broadcast.SetModel": "Admin {green}{0}{default} set {lime}{1}{default}'s model to {lime}{2}",
     "GetPlayerModel.Command.Notification.Usage": "Usage: !getmodel <target>",
     "GetPlayerModel.Command.Notification.PlayerModel": "{lime}{0}{default} is using {green}{1}",
