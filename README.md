@@ -8,7 +8,9 @@ You need install these to plugin work:
 - [TNCSSPluginFoundation](https://github.com/fltuna/TNCSSPluginFoundation/releases/latest)
 - [NativeVoteAPI](https://github.com/fltuna/NativeVoteAPI-CS2/releases/latest)
 
-## Features
+# Features
+
+## Game related
 
 ### Terminate round
 
@@ -26,6 +28,36 @@ Extends a round time while in the round.
 or you can use `css_ert <number of seconds>` and `!ert <number of seconds>` instead.
 
 
+### Extend time limit
+
+Extends a map time limit.
+
+`css_extend <minuets>` or type `!extend <minuets>` in chat to use.
+
+
+### Extend time limit vote
+
+Extends a map time limit if vote succeed.
+
+`css_voteextend <minuets>` or type `!voteextend <minuets>` in chat to use.
+
+
+## Player related
+
+### Set name
+
+Set name of player.
+
+`css_setname <target> <name>` or type `!setname <target> <name>` in chat to use.
+
+
+### Set clan tag
+
+Set clan tag of player.
+
+`css_clantag <target> <name>` or type `!clantag <target> <name>` in chat to use.
+
+
 ### Set Health
 
 Set health of player.
@@ -37,9 +69,9 @@ Set health of player.
 
 Set armor value of player.
 
-`css_setkevlar <target> <amount>` or type `!setkevlar <target> <amount>` in chat to use.
+`css_setkevlar <target> <amount> [helmet?] [heavyArmor?]` or type `!setkevlar <target> <amount> [helmet?] [heavyArmor?]` in chat to use.
 
-or you can use `css_setkev <target> <amount>` and `!setkev <target> <amount>` instead.
+or you can use `css_setkev <target> <amount> [helmet?] [heavyArmor?]` and `!setkev <target> <amount> [helmet?] [heavyArmor?]` instead.
 
 
 ### Respawn Player
@@ -54,6 +86,13 @@ Respawns a player.
 Set player's cash.
 
 `css_cash <target> <amount>` or type `!cash <target> <amount>` in chat to use.
+
+
+### Give weapon
+
+Give weapon to player.
+
+`css_weapon <target> <weapon> [clip] [reserveAmmo]` or type `!weapon <target> <weapon> [clip] [reserveAmmo]` in chat to use.
 
 
 ### Set Team
@@ -93,3 +132,18 @@ It will print the these information about all clients in the server to client co
 5. SteamID: Prints a SteamID64
 6. IpAddress: Only user who has a root role can see this information
 7. Ping: User's ping
+
+## Team related
+
+### Set team name
+
+Set team name appear in scoreboard.
+
+`css_teamname <teamID> <name>` or type `!teamname <teamID> <name>` in chat to use.
+
+
+### Set team score
+
+Set team score appear in scoreboard, etc...
+
+`css_teamscore <teamID> <name>` or type `!teamscore <teamID> <name>` in chat to use.
