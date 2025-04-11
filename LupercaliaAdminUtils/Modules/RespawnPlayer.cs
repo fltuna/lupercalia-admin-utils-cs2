@@ -61,7 +61,7 @@ public class RespawnPlayer(IServiceProvider serviceProvider) : PluginModuleBase(
 
             string targetName = LocalizeString(TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
             
-            Server.PrintToChatAll(LocalizeWithPluginPrefix("Respawn.Command.Broadcast.PlayerRespawned", executorName, targetName));
+            PrintLocalizedChatToAll("Respawn.Command.Broadcast.PlayerRespawned", executorName, targetName);
         }
         else
         {
@@ -75,7 +75,7 @@ public class RespawnPlayer(IServiceProvider serviceProvider) : PluginModuleBase(
             
             target.Respawn();
             target.PrintToChat(LocalizeWithPluginPrefix("Respawn.Command.Notification.YouHaveRespawned", executorName));
-            Server.PrintToChatAll(LocalizeWithPluginPrefix("Respawn.Command.Broadcast.PlayerRespawned", executorName, target.PlayerName));
+            PrintLocalizedChatToAll("Respawn.Command.Broadcast.PlayerRespawned", executorName, target.PlayerName);
         }
     }
 }

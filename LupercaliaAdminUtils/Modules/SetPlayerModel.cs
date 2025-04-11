@@ -60,14 +60,14 @@ public class SetPlayerModel(IServiceProvider serviceProvider) : PluginModuleBase
 
             string targetName = LocalizeString(TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
             
-            Server.PrintToChatAll(LocalizeWithPluginPrefix("SetPlayerModel.Command.Broadcast.SetModel", executorName, targetName, modelPath));
+            PrintLocalizedChatToAll("SetPlayerModel.Command.Broadcast.SetModel", executorName, targetName, modelPath);
         }
         else
         {
             CCSPlayerController target = targets.First();
             
             PlayerUtil.SetPlayerModel(target, modelPath);
-            Server.PrintToChatAll(LocalizeWithPluginPrefix("SetPlayerModel.Command.Broadcast.SetModel", executorName, target.PlayerName, modelPath));
+            PrintLocalizedChatToAll("SetPlayerModel.Command.Broadcast.SetModel", executorName, target.PlayerName, modelPath);
         }
     }
 

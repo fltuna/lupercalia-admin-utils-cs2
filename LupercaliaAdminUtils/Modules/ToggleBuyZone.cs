@@ -54,6 +54,7 @@ public class ToggleBuyZone(IServiceProvider serviceProvider) : PluginModuleBase(
             return;
         }
 
+        string executorName = PlayerUtil.GetPlayerName(client);
         bool hasTypedTargets = Target.TargetTypeMap.ContainsKey(info.GetArg(1));
 
         if (hasTypedTargets && targets.Count() >= 2)
@@ -70,23 +71,19 @@ public class ToggleBuyZone(IServiceProvider serviceProvider) : PluginModuleBase(
 
             string targetName = LocalizeString(TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
 
-            if (playerBuyZoneStatus)
-            {
-                info.ReplyToCommand(LocalizeWithPluginPrefix("ToggleBuyZone.Command.Notification.Enabled", targetName));
-            }
-            else
-            {
-                info.ReplyToCommand(LocalizeWithPluginPrefix("ToggleBuyZone.Command.Notification.Disabled", targetName));
-            }
+
+
+            string statusString = playerBuyZoneStatus ?  LocalizeString("General.Name.True") : LocalizeString("General.Name.False");
+            PrintLocalizedChatToAll("ToggleBuyZone.Command.Broadcast.SetStatus", executorName, targetName, statusString);
         }
         else
         {
             CCSPlayerController target = targets.First();
-            string playerName = target.PlayerName;
+            string targetName = target.PlayerName;
 
             if (!PlayerUtil.IsPlayerAlive(target))
             {
-                info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.TargetIsDead", playerName));
+                info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.TargetIsDead", targetName));
                 return;
             }
             
@@ -94,14 +91,8 @@ public class ToggleBuyZone(IServiceProvider serviceProvider) : PluginModuleBase(
             
             
             
-            if (playerBuyZoneStatus)
-            {
-                info.ReplyToCommand(LocalizeWithPluginPrefix("ToggleBuyZone.Command.Notification.Enabled", playerName));
-            }
-            else
-            {
-                info.ReplyToCommand(LocalizeWithPluginPrefix("ToggleBuyZone.Command.Notification.Disabled", playerName));
-            }
+            string statusString = playerBuyZoneStatus ?  LocalizeString("General.Name.True") : LocalizeString("General.Name.False");
+            PrintLocalizedChatToAll("ToggleBuyZone.Command.Broadcast.SetStatus", executorName, targetName, statusString);
         }
     }
 }

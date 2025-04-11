@@ -59,7 +59,7 @@ public class SetPlayerName(IServiceProvider serviceProvider) : PluginModuleBase(
 
             string targetName = LocalizeString(TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
             
-            info.ReplyToCommand(LocalizeWithPluginPrefix("SetPlayerName.Command.Broadcast.NameChanged", executorName, targetName, nameChangeTo));
+            PrintLocalizedChatToAll("SetPlayerName.Command.Broadcast.NameChanged", executorName, targetName, nameChangeTo);
         }
         else
         {
@@ -67,7 +67,7 @@ public class SetPlayerName(IServiceProvider serviceProvider) : PluginModuleBase(
 
             string oldName = target.PlayerName;
             PlayerUtil.SetPlayerName(target, nameChangeTo);
-            info.ReplyToCommand(LocalizeWithPluginPrefix("SetPlayerName.Command.Broadcast.NameChanged", executorName, oldName, nameChangeTo));
+            PrintLocalizedChatToAll("SetPlayerName.Command.Broadcast.NameChanged", executorName, oldName, nameChangeTo);
         }
     }
 }

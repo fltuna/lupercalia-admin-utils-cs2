@@ -60,7 +60,7 @@ public class SetTeamScore(IServiceProvider serviceProvider) : PluginModuleBase(s
         string executorName = PlayerUtil.GetPlayerName(client);
         
         CsTeamUtil.SetTeamScore(targetTeam, score);
-        Server.PrintToChatAll(LocalizeWithPluginPrefix("SetTeamScore.Command.Broadcast.ScoreChanged", executorName, targetTeam, score));
+        PrintLocalizedChatToAll("SetTeamScore.Command.Broadcast.ScoreChanged", executorName, targetTeam, score);
     }
 
     
