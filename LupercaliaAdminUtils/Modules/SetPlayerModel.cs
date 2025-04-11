@@ -58,7 +58,7 @@ public class SetPlayerModel(IServiceProvider serviceProvider) : PluginModuleBase
                 PlayerUtil.SetPlayerModel(target, modelPath);
             }
 
-            string targetName = TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1));
+            string targetName = LocalizeString(TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
             
             Server.PrintToChatAll(LocalizeWithPluginPrefix("SetPlayerModel.Command.Broadcast.SetModel", executorName, targetName, modelPath));
         }

@@ -94,7 +94,7 @@ public class SetKevlar(IServiceProvider serviceProvider) : PluginModuleBase(serv
                 PlayerUtil.SetPlayerArmor(target, targetKevlarAmount, helmet, heavyArmor);
             }
 
-            string targetName = TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1));
+            string targetName = LocalizeString(TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
             
             info.ReplyToCommand(LocalizeWithPluginPrefix("SetKevlar.Command.Notification.SetKevlar", targetName, targetKevlarAmount, Convert.ToBoolean(hasHelmet), Convert.ToBoolean(hasHeavyArmor)));
         }

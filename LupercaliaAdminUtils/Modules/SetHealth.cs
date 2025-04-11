@@ -83,7 +83,7 @@ public class SetHealth(IServiceProvider serviceProvider) : PluginModuleBase(serv
                 PlayerUtil.SetPlayerMaxHealth(target, targetHealth);
             }
 
-            string targetName = TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1));
+            string targetName = LocalizeString(TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
             
             info.ReplyToCommand(LocalizeWithPluginPrefix("SetHealth.Command.Notification.SetHealth", targetName, targetHealth));
         }
