@@ -29,5 +29,6 @@ public class LupercaliaAdminUtils: TncssPluginBase
         RegisterModule<ToggleBuyZone>();
         RegisterModule<SetPlayerModel>();
         RegisterModule<UserList>();
+        RegisterModule<SetPlayerName>();
     }
 }
