@@ -40,5 +40,7 @@
     "SetTeamScore.Command.Notification.Usage": "Usage: !teamscore <teamNum> <score>",
     "SetTeamScore.Command.Broadcast.ScoreChanged": "{lime}{0}{default} changed {green}{1}{default} team score to {green}{2}",
     "SetTeamName.Command.Notification.Usage": "Usage: !teamname <teamNum> <name>",
-    "SetTeamName.Command.Broadcast.NameChanged": "{lime}{0}{default} changed {green}{1}{default} team name to {green}{2}"
+    "SetTeamName.Command.Broadcast.NameChanged": "{lime}{0}{default} changed {green}{1}{default} team name to {green}{2}",
+    "SetPlayerClanTag.Command.Notification.Usage": "Usage: !clantag <target> <name>",
+    "SetPlayerClanTag.Command.Broadcast.TagChanged": "{lime}{0}{default} changed {green}{1}{default}'s clan tag to {green}{2}"
 }
