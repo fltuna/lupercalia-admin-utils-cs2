@@ -51,7 +51,7 @@ jobs:
       - name: Create release artifacts
         run: |
           mkdir artifacts
-          Copy-Item -Path "LupercaliaAdminUtils\bin\Release\*\LupercaliaAdminUtils.dll" -Destination "artifacts\LupercaliaAdminUtils.dll" -Force
+          Copy-Item -Path "LupercaliaAdminUtils\bin\Release\*\LupercaliaAdminUtils.dll" -Destination "artifacts\plugins\LupercaliaAdminUtils\LupercaliaAdminUtils.dll" -Force
           Copy-Item -Path "lang\" -Destination "artifacts\lang\" -Recurse -Force
         
       - name: NativeVoteAPI Download from GitHub
