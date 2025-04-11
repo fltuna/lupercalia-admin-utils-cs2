@@ -51,8 +51,10 @@ jobs:
       - name: Create release artifacts
         run: |
           mkdir artifacts
+          mkdir artifacts\plugins\LupercaliaAdminUtils\
+          mkdir artifacts\plugins\LupercaliaAdminUtils\lang
           Copy-Item -Path "LupercaliaAdminUtils\bin\Release\*\LupercaliaAdminUtils.dll" -Destination "artifacts\plugins\LupercaliaAdminUtils\LupercaliaAdminUtils.dll" -Force
-          Copy-Item -Path "lang\" -Destination "artifacts\lang\" -Recurse -Force
+          Copy-Item -Path "lang\" -Destination "artifacts\plugins\LupercaliaAdminUtils\lang\" -Recurse -Force
         
       - name: NativeVoteAPI Download from GitHub
         run: Invoke-WebRequest https://github.com/fltuna/NativeVoteAPI-CS2/releases/latest/download/NativeVoteAPI.zip -OutFile NativeVoteAPI.zip
