@@ -108,6 +108,9 @@ public class GiveWeapon(IServiceProvider serviceProvider) : PluginModuleBase(ser
                 if(target.IsHLTV)
                     continue;
                 
+                if(!PlayerUtil.IsPlayerAlive(target))
+                    continue;
+                    
                 GiveItemToPlayer(target, item, clip, ammo);
             }
 
@@ -118,6 +121,13 @@ public class GiveWeapon(IServiceProvider serviceProvider) : PluginModuleBase(ser
         else
         {
             CCSPlayerController target = targets.First();
+
+            if (!PlayerUtil.IsPlayerAlive(target))
+            {
+                info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.TargetIsDead"));
+                return;
+            }
+            
             GiveItemToPlayer(target, item, clip, ammo);
             
             PrintLocalizedChatToAll("GiveWeapon.Command.Broadcast.GaveWeapon", executorName, item, target.PlayerName);
