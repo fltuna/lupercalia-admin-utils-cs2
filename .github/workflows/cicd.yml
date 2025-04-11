@@ -54,7 +54,6 @@ jobs:
           Copy-Item -Path "LupercaliaAdminUtils\bin\Release\*\LupercaliaAdminUtils.dll" -Destination "artifacts\LupercaliaAdminUtils.dll" -Force
           Copy-Item -Path "lang\" -Destination "artifacts\lang\" -Recurse -Force
 
-
       - name: [NativeVoteAPI] Download from GitHub
         run: |
           Invoke-WebRequest https://github.com/fltuna/NativeVoteAPI-CS2/releases/latest/download/NativeVoteAPI.zip -OutFile NativeVoteAPI.zip
@@ -71,7 +70,6 @@ jobs:
       - name: [TNCSSPluginFoundation] Extract ZIP and put into artifacts
         run: |
           Expand-Archive -Path TNCSSPluginFoundation.zip -DestinationPath artifacts\
-
 
       - name: Compress artifacts
         run:
