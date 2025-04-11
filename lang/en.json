@@ -54,5 +54,8 @@
     "SetTeamName.Command.Notification.Usage": "Usage: !teamname <teamNum> <name>",
     "SetTeamName.Command.Broadcast.NameChanged": "Admin {green}{0}{default} changed {green}{1}{default} team name to {green}{2}",
     "SetPlayerClanTag.Command.Notification.Usage": "Usage: !clantag <target> <name>",
-    "SetPlayerClanTag.Command.Broadcast.TagChanged": "Admin {green}{0}{default} changed {lime}{1}{default}'s clan tag to {lime}{2}"
+    "SetPlayerClanTag.Command.Broadcast.TagChanged": "Admin {green}{0}{default} changed {lime}{1}{default}'s clan tag to {lime}{2}",
+    "GiveWeapon.Command.Notification.Usage": "Usage: !weapon <target> <weapon> [clip1] [reserveAmmo]",
+    "GiveWeapon.Command.Notification.WeaponNotFound": "Weapon {0} is not found! See console for available weapons.",
+    "GiveWeapon.Command.Broadcast.GaveWeapon": "Admin {green}{0}{default} gave {green}{1}{default} to {lime}{2}{default}"
 }
