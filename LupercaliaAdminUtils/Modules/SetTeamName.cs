@@ -57,16 +57,4 @@ public class SetTeamName(IServiceProvider serviceProvider) : PluginModuleBase(se
         CsTeamUtil.SetTeamName(targetTeam, newTeamName);
         PrintLocalizedChatToAll("SetTeamName.Command.Broadcast.NameChanged", executorName, targetTeam, newTeamName);
     }
-
-    
-    // This is the detour method for player is not move team correctly
-    // When player is moved from spectator sometimes player is stuck at world origin.
-    private void MovePlayerFromSpectator(CCSPlayerController client, CsTeam targetTeam)
-    {
-        PlayerUtil.SetPlayerTeam(client, targetTeam);
-        client.Respawn();
-        client.CommitSuicide(false, true);
-        PlayerUtil.SetPlayerTeam(client, CsTeam.Spectator);
-        PlayerUtil.SetPlayerTeam(client, targetTeam);
-    }
 }

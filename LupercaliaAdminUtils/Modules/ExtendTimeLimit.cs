@@ -135,19 +135,19 @@ public class ExtendTimeLimit(IServiceProvider serviceProvider) : PluginModuleBas
 
         NativeVoteState state = _nativeVoteApi!.InitiateVote(nInfo);
 
-        if (state == NativeVoteState.InitializeAccepted)
+        switch (state)
         {
-            _timeToExtend = extendTime;
-            PrintLocalizedChatToAll("VoteExtendTimeLimit.Vote.Broadcast.InitiatedVote", PlayerUtil.GetPlayerName(client));
-        }
-        else if (state == NativeVoteState.Voting)
-        {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("VoteExtendTimeLimit.Command.Notification.AnotherVoteIsInProgress"));
-        }
-        else
-        {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.UnknownError"));
-            Logger.LogError($"[VoteExtend] Returned NativeVoteAPI state is not match any normal state: {state}");
+            case NativeVoteState.InitializeAccepted:
+                _timeToExtend = extendTime;
+                PrintLocalizedChatToAll("VoteExtendTimeLimit.Vote.Broadcast.InitiatedVote", PlayerUtil.GetPlayerName(client));
+                break;
+            case NativeVoteState.Voting:
+                info.ReplyToCommand(LocalizeWithPluginPrefix("VoteExtendTimeLimit.Command.Notification.AnotherVoteIsInProgress"));
+                break;
+            default:
+                info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.UnknownError"));
+                Logger.LogError($"[VoteExtend] Returned NativeVoteAPI state is not match any normal state: {state}");
+                break;
         }
     }
 
