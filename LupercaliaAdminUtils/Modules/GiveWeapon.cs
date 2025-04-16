@@ -9,6 +9,7 @@ using CounterStrikeSharp.API.Modules.Utils;
 using LupercaliaAdminUtils.util;
 using Microsoft.Extensions.Logging;
 using TNCSSPluginFoundation.Models.Plugin;
+using TNCSSPluginFoundation.Utils;
 using TNCSSPluginFoundation.Utils.Entity;
 
 namespace LupercaliaAdminUtils.Modules;
@@ -41,14 +42,15 @@ public class GiveWeapon(IServiceProvider serviceProvider) : PluginModuleBase(ser
         string weaponName = info.GetArg(2);
 
 
-        if (!EnumExtensions.TryGetEnumByEnumMemberValue("weapon_" + weaponName, out CsItem item))
+        
+        if (!EnumUtility.TryGetEnumByEnumMemberValue("weapon_" + weaponName, out CsItem item))
         {
             info.ReplyToCommand(LocalizeWithPluginPrefix("GiveWeapon.Command.Notification.WeaponNotFound", weaponName));
 
             StringBuilder msg = new StringBuilder();
             
             // TODO(): Cache all available weapon name.
-            if (!EnumExtensions.TryGetAllEnumMemberValues<CsItem>(out var list))
+            if (!EnumUtility.TryGetAllEnumMemberValues<CsItem>(out var list))
             {
                 msg.Append("[GiveWeapon] Error! Failed to find items!");
                 return;
