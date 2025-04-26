@@ -18,7 +18,7 @@ public class LupercaliaAdminUtils: TncssPluginBase
 
     public override string BaseCfgDirectoryPath => Path.Combine(Server.GameDirectory, "csgo/cfg/LupercaliaAdminUtils/");
     public override string ConVarConfigPath => Path.Combine(BaseCfgDirectoryPath, "LupercaliaAdminUtils.cfg");
-    protected override string PluginPrefix => $" {ChatColors.DarkRed}[{ChatColors.Blue}LPŘ AU{ChatColors.DarkRed}]{ChatColors.Default}";
+    public override string PluginPrefix => $" {ChatColors.DarkRed}[{ChatColors.Blue}LPŘ AU{ChatColors.DarkRed}]{ChatColors.Default}";
 
     protected override void TncssOnPluginLoad(bool hotReload)
     {
