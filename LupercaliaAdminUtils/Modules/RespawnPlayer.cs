@@ -3,6 +3,7 @@ using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Modules.Admin;
 using CounterStrikeSharp.API.Modules.Commands;
 using CounterStrikeSharp.API.Modules.Commands.Targeting;
+using CounterStrikeSharp.API.Modules.Utils;
 using LupercaliaAdminUtils.util;
 using TNCSSPluginFoundation.Models.Plugin;
 using TNCSSPluginFoundation.Utils.Entity;
@@ -54,6 +55,9 @@ public class RespawnPlayer(IServiceProvider serviceProvider) : PluginModuleBase(
                 
                 if (PlayerUtil.IsPlayerAlive(target))
                     continue;
+                
+                if (target.Team is CsTeam.None or CsTeam.Spectator)
+                    continue;
             
                 target.PrintToChat(LocalizeWithPluginPrefix("Respawn.Command.Notification.YouHaveRespawned", executorName));
                 target.Respawn();
@@ -71,6 +75,11 @@ public class RespawnPlayer(IServiceProvider serviceProvider) : PluginModuleBase(
             {
                 info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.TargetIsStillAlive", target.PlayerName));
                 return;
+            }
+
+            if (target.Team is CsTeam.None or CsTeam.Spectator)
+            {
+                info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.TargetNotFound"));
             }
             
             target.Respawn();
