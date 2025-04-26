@@ -22,6 +22,7 @@ public class LupercaliaAdminUtils: TncssPluginBase
 
     protected override void TncssOnPluginLoad(bool hotReload)
     {
+        RegisterModule<AdminSay>();
         RegisterModule<TerminateRound>();
         RegisterModule<ExtendRoundTime>();
         RegisterModule<RespawnPlayer>();

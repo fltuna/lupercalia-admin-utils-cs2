@@ -16,6 +16,8 @@
     "General.Command.Notification.UnknownError": "不明なエラーが発生しました、詳細はサーバーコンソールを確認してください",
     "General.Command.Notification.TargetNotFound": "指定されたターゲットが見つかりませんでした！",
     "General.Command.Notification.SeeClientConsoleOutput": "コンソールを確認してください",
+    "AdminSay.Broadcast.Admin": "{red}[管理者 {0}]{default}",
+    "AdminSay.Broadcast.NonAdmin": "{red}[管理者]{default}",
     "ExtendRoundTime.Command.Notification.Usage": "使い方: !exttime <秒>",
     "ExtendRoundTime.Command.Broadcast.SuccessfullyExtended": "{green}管理者 {lime}{0}{default} がラウンドの制限時間を  {lime}{2}{default} 秒 から {lime}{1}{default} 秒に延長しました",
     "ExtendTimeLimit.Command.Notification.Usage": "使い方: !extend <分>",
