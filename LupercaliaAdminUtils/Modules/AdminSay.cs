@@ -43,27 +43,9 @@ public sealed class AdminSay(IServiceProvider serviceProvider) : PluginModuleBas
         if (!AdminManager.PlayerHasPermissions(client, RequiredPermission.Value))
             return HookResult.Continue;
 
-        StringBuilder builder = new();
-        
-        builder.Append(info.ArgString);
 
-        int prefixPos = info.ArgString.IndexOf('@');
 
-        if (prefixPos >= 0)
-        {
-            builder.Remove(prefixPos, 1);
-        }
-
-        
-        // Remove "" if arg is started by "
-        // This is a different say command usage behaviour between chat box and console
-        if (builder[0] == '\"')
-        {
-            builder.Remove(0, 1);
-            builder.Remove(builder.Length - 1, 1);
-        }
-        
-        PrintMessage(client, builder.ToString());
+        PrintMessage(client, CreateMessageFromArg(info.ArgString));
         
         return HookResult.Handled;
     }
@@ -78,12 +60,38 @@ public sealed class AdminSay(IServiceProvider serviceProvider) : PluginModuleBas
 
             if (AdminManager.PlayerHasPermissions(client, RequiredPermission.Value))
             {
-                client.PrintToChat($"{LocalizeStringForPlayer(client, "AdminSay.Broadcast.Admin", executor.PlayerName)} {message}");
+                client.PrintToChat(LocalizeStringForPlayer(client, "AdminSay.Broadcast.Admin", executor.PlayerName, message));
             }
             else
             {
-                client.PrintToChat($"{LocalizeStringForPlayer(client, "AdminSay.Broadcast.NonAdmin")} {message}");
+                client.PrintToChat(LocalizeStringForPlayer(client, "AdminSay.Broadcast.NonAdmin", executor.PlayerName, message));
             }
         }
+    }
+
+    private string CreateMessageFromArg(string argString)
+    {
+        
+        StringBuilder builder = new();
+        
+        builder.Append(argString);
+
+        int prefixPos = argString.IndexOf('@');
+
+        if (prefixPos >= 0)
+        {
+            builder.Remove(prefixPos, 1);
+        }
+
+        
+        // Remove "" if arg is started by "
+        // This is a different say command usage behaviour between chat box and console
+        if (builder[0] == '\"')
+        {
+            builder.Remove(0, 1);
+            builder.Remove(builder.Length - 1, 1);
+        }
+
+        return builder.ToString();
     }
 }
