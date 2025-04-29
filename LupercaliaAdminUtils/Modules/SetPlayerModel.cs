@@ -13,6 +13,7 @@ public class SetPlayerModel(IServiceProvider serviceProvider) : PluginModuleBase
 {
     public override string PluginModuleName => "SetPlayerModel";
     public override string ModuleChatPrefix => "[SetPlayerModel]";
+    protected override bool UseTranslationKeyInModuleChatPrefix => false;
 
     protected override void OnInitialize()
     {

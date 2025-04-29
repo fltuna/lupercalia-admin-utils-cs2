@@ -12,6 +12,7 @@ public sealed class AdminSay(IServiceProvider serviceProvider) : PluginModuleBas
 {
     public override string PluginModuleName => "AdminSay";
     public override string ModuleChatPrefix => "unused";
+    protected override bool UseTranslationKeyInModuleChatPrefix => false;
 
     public FakeConVar<string> RequiredPermission = new ("css_admin_say_required_permission", "Required permission to use @say format command", "css/generic");
 

@@ -14,6 +14,7 @@ public class ToggleBuyZone(IServiceProvider serviceProvider) : PluginModuleBase(
 {
     public override string PluginModuleName => "ToggleBuyZone";
     public override string ModuleChatPrefix => "[ToggleBuyZone]";
+    protected override bool UseTranslationKeyInModuleChatPrefix => false;
 
     protected override void OnInitialize()
     {

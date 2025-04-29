@@ -12,6 +12,7 @@ public class TerminateRound(IServiceProvider serviceProvider) : PluginModuleBase
 {
     public override string PluginModuleName => "TerminateRound";
     public override string ModuleChatPrefix => "[TerminateRound]";
+    protected override bool UseTranslationKeyInModuleChatPrefix => false;
 
     protected override void OnInitialize()
     {

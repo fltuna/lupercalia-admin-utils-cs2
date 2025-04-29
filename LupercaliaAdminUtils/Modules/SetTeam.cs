@@ -15,6 +15,7 @@ public class SetTeam(IServiceProvider serviceProvider) : PluginModuleBase(servic
 {
     public override string PluginModuleName => "MoveTeam";
     public override string ModuleChatPrefix => "[MoveTeam]";
+    protected override bool UseTranslationKeyInModuleChatPrefix => false;
 
     protected override void OnInitialize()
     {

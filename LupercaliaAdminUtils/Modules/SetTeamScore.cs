@@ -15,6 +15,7 @@ public class SetTeamScore(IServiceProvider serviceProvider) : PluginModuleBase(s
 {
     public override string PluginModuleName => "TeamScore";
     public override string ModuleChatPrefix => "[TeamScore]";
+    protected override bool UseTranslationKeyInModuleChatPrefix => false;
 
     protected override void OnInitialize()
     {

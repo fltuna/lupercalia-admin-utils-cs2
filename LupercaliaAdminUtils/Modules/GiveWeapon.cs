@@ -18,6 +18,7 @@ public class GiveWeapon(IServiceProvider serviceProvider) : PluginModuleBase(ser
 {
     public override string PluginModuleName => "GiveWeapon";
     public override string ModuleChatPrefix => "[GiveWeapon]";
+    protected override bool UseTranslationKeyInModuleChatPrefix => false;
 
     protected override void OnInitialize()
     {

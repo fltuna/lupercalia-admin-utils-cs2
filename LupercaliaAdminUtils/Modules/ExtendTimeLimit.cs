@@ -15,8 +15,9 @@ namespace LupercaliaAdminUtils.Modules;
 
 public class ExtendTimeLimit(IServiceProvider serviceProvider) : PluginModuleBase(serviceProvider)
 {
-    public override string PluginModuleName => "ExtendRoundTime";
-    public override string ModuleChatPrefix => "[ExtendRoundTime]";
+    public override string PluginModuleName => "ExtendTimeLimit";
+    public override string ModuleChatPrefix => "[ExtendTimeLimit]";
+    protected override bool UseTranslationKeyInModuleChatPrefix => false;
 
     private ConVar? mp_timelimit => ConVar.Find("mp_timelimit");
     

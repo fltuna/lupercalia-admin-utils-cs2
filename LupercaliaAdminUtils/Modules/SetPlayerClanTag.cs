@@ -14,6 +14,7 @@ public class SetPlayerClanTag(IServiceProvider serviceProvider) : PluginModuleBa
 {
     public override string PluginModuleName => "SetName";
     public override string ModuleChatPrefix => "[SetName]";
+    protected override bool UseTranslationKeyInModuleChatPrefix => false;
 
     protected override void OnInitialize()
     {

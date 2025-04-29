@@ -13,6 +13,7 @@ public class UserList(IServiceProvider serviceProvider) : PluginModuleBase(servi
 {
     public override string PluginModuleName => "UserList";
     public override string ModuleChatPrefix => "[UserList]";
+    protected override bool UseTranslationKeyInModuleChatPrefix => false;
 
     protected override void OnInitialize()
     {

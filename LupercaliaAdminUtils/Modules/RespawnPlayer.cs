@@ -14,6 +14,7 @@ public class RespawnPlayer(IServiceProvider serviceProvider) : PluginModuleBase(
 {
     public override string PluginModuleName => "RespawnPlayer";
     public override string ModuleChatPrefix => "[RespawnPlayer]";
+    protected override bool UseTranslationKeyInModuleChatPrefix => false;
 
     protected override void OnInitialize()
     {

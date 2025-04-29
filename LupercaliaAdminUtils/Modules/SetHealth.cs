@@ -14,6 +14,7 @@ public class SetHealth(IServiceProvider serviceProvider) : PluginModuleBase(serv
 {
     public override string PluginModuleName => "SetHealth";
     public override string ModuleChatPrefix => "[SetHealth]";
+    protected override bool UseTranslationKeyInModuleChatPrefix => false;
 
     protected override void OnInitialize()
     {

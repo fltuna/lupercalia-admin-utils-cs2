@@ -14,6 +14,7 @@ public class SetKevlar(IServiceProvider serviceProvider) : PluginModuleBase(serv
 {
     public override string PluginModuleName => "SetKevlar";
     public override string ModuleChatPrefix => "[SetKevlar]";
+    protected override bool UseTranslationKeyInModuleChatPrefix => false;
 
     protected override void OnInitialize()
     {

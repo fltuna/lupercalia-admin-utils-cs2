@@ -12,6 +12,7 @@ public class ExtendRoundTime(IServiceProvider serviceProvider) : PluginModuleBas
 {
     public override string PluginModuleName => "ExtendRoundTime";
     public override string ModuleChatPrefix => "[ExtendRoundTime]";
+    protected override bool UseTranslationKeyInModuleChatPrefix => false;
 
     protected override void OnInitialize()
     {

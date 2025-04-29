@@ -14,6 +14,7 @@ public class SetCash(IServiceProvider serviceProvider) : PluginModuleBase(servic
 {
     public override string PluginModuleName => "SetCash";
     public override string ModuleChatPrefix => "[SetCash]";
+    protected override bool UseTranslationKeyInModuleChatPrefix => false;
 
     protected override void OnInitialize()
     {
