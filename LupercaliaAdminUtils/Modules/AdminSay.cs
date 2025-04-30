@@ -65,14 +65,13 @@ public sealed class AdminSay(IServiceProvider serviceProvider) : PluginModuleBas
             }
             else
             {
-                client.PrintToChat(LocalizeStringForPlayer(client, "AdminSay.Broadcast.NonAdmin", executor.PlayerName, message));
+                client.PrintToChat(LocalizeStringForPlayer(client, "AdminSay.Broadcast.NonAdmin", message));
             }
         }
     }
 
     private string CreateMessageFromArg(string argString)
     {
-        
         StringBuilder builder = new();
         
         builder.Append(argString);
