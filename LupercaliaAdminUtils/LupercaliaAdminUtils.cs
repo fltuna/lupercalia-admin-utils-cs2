@@ -39,7 +39,6 @@ public sealed class LupercaliaAdminUtils: TncssPluginBase
         RegisterModule<SetTeamScore>();
         RegisterModule<SetTeamName>();
         RegisterModule<SetPlayerClanTag>();
-        RegisterModule<ExtendTimeLimit>();
         RegisterModule<GiveWeapon>();
     }
 
