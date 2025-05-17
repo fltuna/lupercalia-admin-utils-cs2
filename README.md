@@ -40,14 +40,14 @@ or you can use `css_ert <number of seconds>` and `!ert <number of seconds>` inst
 
 Extends a map time limit.
 
-`css_extend <minuets>` or type `!extend <minuets>` in chat to use.
+This feature is moved to [MapChooserSharp](https://github.com/fltuna/MapChooserSharp)
 
 
 ### Extend time limit vote
 
 Extends a map time limit if vote succeed.
 
-`css_voteextend <minuets>` or type `!voteextend <minuets>` in chat to use.
+This feature is moved to [MapChooserSharp](https://github.com/fltuna/MapChooserSharp)
 
 
 ## Player related
