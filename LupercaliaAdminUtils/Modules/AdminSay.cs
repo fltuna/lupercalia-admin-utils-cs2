@@ -61,11 +61,11 @@ public sealed class AdminSay(IServiceProvider serviceProvider) : PluginModuleBas
 
             if (AdminManager.PlayerHasPermissions(client, RequiredPermission.Value))
             {
-                client.PrintToChat(LocalizeStringForPlayer(client, "AdminSay.Broadcast.Admin", executor.PlayerName, message));
+                client.PrintToChat(LocalizeWithPluginPrefixForPlayer(client, "AdminSay.Broadcast.Admin", executor.PlayerName, message));
             }
             else
             {
-                client.PrintToChat(LocalizeStringForPlayer(client, "AdminSay.Broadcast.NonAdmin", message));
+                client.PrintToChat(LocalizeWithPluginPrefixForPlayer(client, "AdminSay.Broadcast.NonAdmin", message));
             }
         }
     }

@@ -6,7 +6,6 @@ This plugin provides convenient command for server administration.
 
 You need install these to plugin work:
 - [TNCSSPluginFoundation](https://github.com/fltuna/TNCSSPluginFoundation/releases/latest)
-- [NativeVoteAPI](https://github.com/fltuna/NativeVoteAPI-CS2/releases/latest)
 
 # Installation
 
