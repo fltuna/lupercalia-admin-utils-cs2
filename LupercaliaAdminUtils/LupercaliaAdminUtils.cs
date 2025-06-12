@@ -1,6 +1,7 @@
 ﻿using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Modules.Utils;
 using LupercaliaAdminUtils.Modules;
+using LupercaliaAdminUtils.Modules.AdminMessaging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NativeVoteAPI.API;
@@ -25,6 +26,7 @@ public sealed class LupercaliaAdminUtils: TncssPluginBase
     protected override void TncssOnPluginLoad(bool hotReload)
     {
         RegisterModule<AdminSay>();
+        RegisterModule<AdminMessaging>();
         RegisterModule<TerminateRound>();
         RegisterModule<ExtendRoundTime>();
         RegisterModule<RespawnPlayer>();
