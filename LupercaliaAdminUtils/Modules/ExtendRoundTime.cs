@@ -32,13 +32,13 @@ public class ExtendRoundTime(IServiceProvider serviceProvider) : PluginModuleBas
     {
         if(info.ArgCount < 2)
         {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("ExtendRoundTime.Command.Notification.Usage"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "ExtendRoundTime.Command.Notification.Usage"));
             return;
         }
 
         if (!int.TryParse(info.GetArg(1), out var extendTime))
         {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.InvalidArgumentsInput"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "General.Command.Notification.InvalidArgumentsInput"));
             return;
         }
         

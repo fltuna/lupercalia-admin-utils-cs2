@@ -33,19 +33,19 @@ public class SetTeam(IServiceProvider serviceProvider) : PluginModuleBase(servic
     {
         if (info.ArgCount <= 2)
         {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("SetTeam.Command.Notification.Usage"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "SetTeam.Command.Notification.Usage"));
             return;
         }
 
         if (!int.TryParse(info.GetArg(2), out int teamNumberToMove))
         {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.InvalidArgumentsInput"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "General.Command.Notification.InvalidArgumentsInput"));
             return;
         }
 
         if (teamNumberToMove is < 1 or > 3)
         {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.InvalidValue", "1~3"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "General.Command.Notification.InvalidValue", "1~3"));
             return;
         }
         
@@ -53,7 +53,7 @@ public class SetTeam(IServiceProvider serviceProvider) : PluginModuleBase(servic
         TargetResult targets = info.GetArgTargetResult(1);
         
         if(!targets.Any()) {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.TargetNotFound"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "General.Command.Notification.TargetNotFound"));
             return;
         }
 
@@ -83,7 +83,7 @@ public class SetTeam(IServiceProvider serviceProvider) : PluginModuleBase(servic
                 PlayerUtil.SetPlayerTeam(target, targetTeam);
             }
 
-            string targetName = LocalizeString(TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
+            string targetName = LocalizeString(client, TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
             
             PrintLocalizedChatToAll("SetTeam.Command.Broadcast.SetTeam", executorName, targetName, targetTeam);
         }

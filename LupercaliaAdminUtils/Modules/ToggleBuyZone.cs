@@ -31,19 +31,19 @@ public class ToggleBuyZone(IServiceProvider serviceProvider) : PluginModuleBase(
     {
         if (info.ArgCount <= 2)
         {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("ToggleBuyZone.Command.Notification.Usage"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "ToggleBuyZone.Command.Notification.Usage"));
             return;
         }
 
         if (!byte.TryParse(info.GetArg(2), out byte treatedAsUserInBuyZone))
         {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.InvalidArgumentsInput"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "General.Command.Notification.InvalidArgumentsInput"));
             return;
         }
 
         if (treatedAsUserInBuyZone >= 2)
         {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.InvalidValue", "0 or 1"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "General.Command.Notification.InvalidValue", "0 or 1"));
             return;
         }
 
@@ -51,7 +51,7 @@ public class ToggleBuyZone(IServiceProvider serviceProvider) : PluginModuleBase(
         TargetResult targets = info.GetArgTargetResult(1);
         
         if(!targets.Any()) {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.TargetNotFound"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "General.Command.Notification.TargetNotFound"));
             return;
         }
 
@@ -70,11 +70,11 @@ public class ToggleBuyZone(IServiceProvider serviceProvider) : PluginModuleBase(
                 PlayerUtil.SetPlayerBuyZoneStatus(target, playerBuyZoneStatus);
             }
 
-            string targetName = LocalizeString(TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
+            string targetName = LocalizeString(client, TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
 
 
 
-            string statusString = playerBuyZoneStatus ?  LocalizeString("General.Name.True") : LocalizeString("General.Name.False");
+            string statusString = playerBuyZoneStatus ?  LocalizeString(client, "General.Name.True") : LocalizeString(client, "General.Name.False");
             PrintLocalizedChatToAll("ToggleBuyZone.Command.Broadcast.SetStatus", executorName, targetName, statusString);
         }
         else
@@ -84,7 +84,7 @@ public class ToggleBuyZone(IServiceProvider serviceProvider) : PluginModuleBase(
 
             if (!PlayerUtil.IsPlayerAlive(target))
             {
-                info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.TargetIsDead", targetName));
+                info.ReplyToCommand(LocalizeWithPluginPrefix(client, "General.Command.Notification.TargetIsDead", targetName));
                 return;
             }
             
@@ -92,7 +92,7 @@ public class ToggleBuyZone(IServiceProvider serviceProvider) : PluginModuleBase(
             
             
             
-            string statusString = playerBuyZoneStatus ?  LocalizeString("General.Name.True") : LocalizeString("General.Name.False");
+            string statusString = playerBuyZoneStatus ?  LocalizeString(client, "General.Name.True") : LocalizeString(client, "General.Name.False");
             PrintLocalizedChatToAll("ToggleBuyZone.Command.Broadcast.SetStatus", executorName, targetName, statusString);
         }
     }

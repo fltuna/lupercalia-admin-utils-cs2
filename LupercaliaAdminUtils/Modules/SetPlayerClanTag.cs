@@ -32,7 +32,7 @@ public class SetPlayerClanTag(IServiceProvider serviceProvider) : PluginModuleBa
     {
         if (info.ArgCount <= 2)
         {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("SetPlayerClanTag.Command.Notification.Usage"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "SetPlayerClanTag.Command.Notification.Usage"));
             return;
         }
         
@@ -41,7 +41,7 @@ public class SetPlayerClanTag(IServiceProvider serviceProvider) : PluginModuleBa
         TargetResult targets = info.GetArgTargetResult(1);
         
         if(!targets.Any()) {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.TargetNotFound"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "General.Command.Notification.TargetNotFound"));
             return;
         }
 
@@ -58,7 +58,7 @@ public class SetPlayerClanTag(IServiceProvider serviceProvider) : PluginModuleBa
                 PlayerUtil.SetPlayerClanTag(target, clanTag);
             }
 
-            string targetName = LocalizeString(TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
+            string targetName = LocalizeString(client, TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
             
             PrintLocalizedChatToAll("SetPlayerClanTag.Command.Broadcast.TagChanged", executorName, targetName, clanTag);
         }

@@ -16,14 +16,7 @@ public sealed partial class AdminMessaging
     {
         if (info.ArgCount <= 2)
         {
-            if (client == null)
-            {
-                Server.PrintToConsole(LocalizeString("AdminMessaging.Command.General.Usage", info.ArgByIndex(0).ToLower().Replace("css_", "")));
-            }
-            else
-            {
-                client.PrintToChat(LocalizeWithPluginPrefixForPlayer(client, "AdminMessaging.Command.General.Usage", info.ArgByIndex(0).ToLower().Replace("css_", "")));
-            }
+            PrintMessageToServerOrPlayerChat(client, LocalizeWithPluginPrefix(client, "AdminMessaging.Command.General.Usage", info.ArgByIndex(0).ToLower().Replace("css_", "")));
             return;
         }
 
@@ -31,14 +24,7 @@ public sealed partial class AdminMessaging
         
         if(!targets.Any())
         {
-            if (client == null)
-            {
-                Server.PrintToConsole(LocalizeString("General.Command.Notification.TargetNotFound"));
-            }
-            else
-            {
-                client.PrintToChat(LocalizeWithPluginPrefixForPlayer(client, "General.Command.Notification.TargetNotFound"));
-            }
+            PrintMessageToServerOrPlayerChat(client, LocalizeWithPluginPrefix(client, "General.Command.Notification.TargetNotFound"));
             return;
         }
 
@@ -52,13 +38,13 @@ public sealed partial class AdminMessaging
                 if(target.IsBot || target.IsHLTV)
                     continue;
                 
-                target.PrintToCenterAlert(LocalizeStringForPlayer(target, "AdminMessaging.CenterAlertSay.Message", executorName, message.ReplaceColorTags()));
+                target.PrintToCenterAlert(LocalizeString(target, "AdminMessaging.CenterAlertSay.Message", executorName, message.ReplaceColorTags()));
             }
         }
         else
         {
             CCSPlayerController target = targets.First();
-            target.PrintToCenterAlert(LocalizeStringForPlayer(target, "AdminMessaging.CenterAlertSay.Message", executorName, message.ReplaceColorTags()));
+            target.PrintToCenterAlert(LocalizeString(target, "AdminMessaging.CenterAlertSay.Message", executorName, message.ReplaceColorTags()));
         }
     }
 }

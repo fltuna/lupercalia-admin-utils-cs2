@@ -36,7 +36,7 @@ public class GiveWeapon(IServiceProvider serviceProvider) : PluginModuleBase(ser
     {
         if (info.ArgCount <= 2)
         {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("GiveWeapon.Command.Notification.Usage"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "GiveWeapon.Command.Notification.Usage"));
             return;
         }
         
@@ -46,7 +46,7 @@ public class GiveWeapon(IServiceProvider serviceProvider) : PluginModuleBase(ser
         
         if (!EnumUtility.TryGetEnumByEnumMemberValue("weapon_" + weaponName, out CsItem item))
         {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("GiveWeapon.Command.Notification.WeaponNotFound", weaponName));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "GiveWeapon.Command.Notification.WeaponNotFound", weaponName));
 
             StringBuilder msg = new StringBuilder();
             
@@ -97,7 +97,7 @@ public class GiveWeapon(IServiceProvider serviceProvider) : PluginModuleBase(ser
         TargetResult targets = info.GetArgTargetResult(1);
         
         if(!targets.Any()) {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.TargetNotFound"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "General.Command.Notification.TargetNotFound"));
             return;
         }
 
@@ -117,7 +117,7 @@ public class GiveWeapon(IServiceProvider serviceProvider) : PluginModuleBase(ser
                 GiveItemToPlayer(target, item, clip, ammo);
             }
 
-            string targetName = LocalizeString(TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
+            string targetName = LocalizeString(client, TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
             
             PrintLocalizedChatToAll("GiveWeapon.Command.Broadcast.GaveWeapon", executorName, item, targetName);
         }
@@ -127,7 +127,7 @@ public class GiveWeapon(IServiceProvider serviceProvider) : PluginModuleBase(ser
 
             if (!PlayerUtil.IsPlayerAlive(target))
             {
-                info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.TargetIsDead"));
+                info.ReplyToCommand(LocalizeWithPluginPrefix(client, "General.Command.Notification.TargetIsDead"));
                 return;
             }
             

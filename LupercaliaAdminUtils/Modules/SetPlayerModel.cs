@@ -33,7 +33,7 @@ public class SetPlayerModel(IServiceProvider serviceProvider) : PluginModuleBase
     {
         if (info.ArgCount <= 2)
         {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("SetPlayerModel.Command.Notification.Usage"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "SetPlayerModel.Command.Notification.Usage"));
             return;
         }
 
@@ -41,7 +41,7 @@ public class SetPlayerModel(IServiceProvider serviceProvider) : PluginModuleBase
 
         if (!modelPath.EndsWith(".vmdl"))
         {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("SetPlayerModel.Command.Notification.PathShouldEndWithVmdl"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "SetPlayerModel.Command.Notification.PathShouldEndWithVmdl"));
             return;
         }
         
@@ -50,7 +50,7 @@ public class SetPlayerModel(IServiceProvider serviceProvider) : PluginModuleBase
         TargetResult targets = info.GetArgTargetResult(1);
         
         if(!targets.Any()) {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.TargetNotFound"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "General.Command.Notification.TargetNotFound"));
             return;
         }
 
@@ -65,7 +65,7 @@ public class SetPlayerModel(IServiceProvider serviceProvider) : PluginModuleBase
                 PlayerUtil.SetPlayerModel(target, modelPath);
             }
 
-            string targetName = LocalizeString(TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
+            string targetName = LocalizeString(client, TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
             
             PrintLocalizedChatToAll("SetPlayerModel.Command.Broadcast.SetModel", executorName, targetName, modelPath);
         }
@@ -87,7 +87,7 @@ public class SetPlayerModel(IServiceProvider serviceProvider) : PluginModuleBase
         
         if (info.ArgCount <= 1)
         {
-            client.PrintToChat(LocalizeWithPluginPrefix("GetPlayerModel.Command.Notification.Usage"));
+            client.PrintToChat(LocalizeWithPluginPrefix(client, "GetPlayerModel.Command.Notification.Usage"));
             return;
         }
         
@@ -95,7 +95,7 @@ public class SetPlayerModel(IServiceProvider serviceProvider) : PluginModuleBase
         TargetResult targets = info.GetArgTargetResult(1);
         
         if(!targets.Any()) {
-            client.PrintToChat(LocalizeWithPluginPrefix("General.Command.Notification.TargetNotFound"));
+            client.PrintToChat(LocalizeWithPluginPrefix(client, "General.Command.Notification.TargetNotFound"));
             return;
         }
 
@@ -116,7 +116,7 @@ public class SetPlayerModel(IServiceProvider serviceProvider) : PluginModuleBase
                 client.PrintToConsole($"{target.PlayerName}\t {PlayerUtil.GetPlayerModel(target)}");
             }
             
-            client.PrintToChat(LocalizeWithPluginPrefix("General.Command.Notification.SeeClientConsoleOutput"));
+            client.PrintToChat(LocalizeWithPluginPrefix(client, "General.Command.Notification.SeeClientConsoleOutput"));
         }
         else
         {
@@ -127,7 +127,7 @@ public class SetPlayerModel(IServiceProvider serviceProvider) : PluginModuleBase
             client.PrintToConsole("User\t ModelName");
             client.PrintToConsole("-------------------------------");
             client.PrintToConsole($"{target.PlayerName}\t {PlayerUtil.GetPlayerModel(target)}");
-            client.PrintToChat(LocalizeWithPluginPrefix("GetPlayerModel.Command.Notification.PlayerModel", target.PlayerName, targetPlayerModel));
+            client.PrintToChat(LocalizeWithPluginPrefix(client, "GetPlayerModel.Command.Notification.PlayerModel", target.PlayerName, targetPlayerModel));
         }
     }
 }

@@ -105,7 +105,7 @@ public class UserList(IServiceProvider serviceProvider) : PluginModuleBase(servi
             }
         }
         
-        client.PrintToChat(LocalizeWithPluginPrefix("General.Command.Notification.SeeClientConsoleOutput"));
+        client.PrintToChat(LocalizeWithPluginPrefix(client, "General.Command.Notification.SeeClientConsoleOutput"));
     }
 
 

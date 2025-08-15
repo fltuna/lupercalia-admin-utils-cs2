@@ -33,19 +33,19 @@ public class SetTeamName(IServiceProvider serviceProvider) : PluginModuleBase(se
     {
         if (info.ArgCount <= 2)
         {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("SetTeamName.Command.Notification.Usage"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "SetTeamName.Command.Notification.Usage"));
             return;
         }
 
         if (!int.TryParse(info.GetArg(1), out int teamNumberToModify))
         {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.InvalidArgumentsInput"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "General.Command.Notification.InvalidArgumentsInput"));
             return;
         }
 
         if (teamNumberToModify is < 2 or > 3)
         {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.InvalidValue", "2~3"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "General.Command.Notification.InvalidValue", "2~3"));
             return;
         }
 

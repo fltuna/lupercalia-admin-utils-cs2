@@ -18,14 +18,7 @@ public sealed partial class AdminMessaging
     {
         if (info.ArgCount <= 3)
         {
-            if (client == null)
-            {
-                Server.PrintToConsole(LocalizeString("AdminMessaging.Command.WithDuration.Usage", info.ArgByIndex(0).ToLower().Replace("css_", "")));
-            }
-            else
-            {
-                client.PrintToChat(LocalizeWithPluginPrefixForPlayer(client, "AdminMessaging.Command.WithDuration.Usage", info.ArgByIndex(0).ToLower().Replace("css_", "")));
-            }
+            PrintMessageToServerOrPlayerChat(client, LocalizeWithPluginPrefix(client, "AdminMessaging.Command.WithDuration.Usage", info.ArgByIndex(0).ToLower().Replace("css_", "")));
             return;
         }
 
@@ -33,40 +26,19 @@ public sealed partial class AdminMessaging
         
         if(!targets.Any())
         {
-            if (client == null)
-            {
-                Server.PrintToConsole(LocalizeString("General.Command.Notification.TargetNotFound"));
-            }
-            else
-            {
-                client.PrintToChat(LocalizeWithPluginPrefixForPlayer(client, "General.Command.Notification.TargetNotFound"));
-            }
+            PrintMessageToServerOrPlayerChat(client, LocalizeWithPluginPrefix(client, "General.Command.Notification.TargetNotFound"));
             return;
         }
         
         if(!float.TryParse(info.ArgByIndex(2), out float duration))
         {
-            if (client == null)
-            {
-                Server.PrintToConsole(LocalizeString("General.Command.Notification.InvalidArgumentsInput"));
-            }
-            else
-            {
-                client.PrintToChat(LocalizeWithPluginPrefixForPlayer(client, "General.Command.Notification.InvalidArgumentsInput"));
-            }
+            PrintMessageToServerOrPlayerChat(client, LocalizeWithPluginPrefix(client, "General.Command.Notification.InvalidArgumentsInput"));
             return;
         }
         
         if (duration is < MinDuration or > MaxDuration)
         {
-            if (client == null)
-            {
-                Server.PrintToConsole(LocalizeString("General.Command.Notification.InvalidValue", $"{MinDuration} - {MaxDuration}"));
-            }
-            else
-            {
-                client.PrintToChat(LocalizeWithPluginPrefixForPlayer(client, "General.Command.Notification.InvalidValue", $"{MinDuration} - {MaxDuration}"));
-            }
+            PrintMessageToServerOrPlayerChat(client, LocalizeWithPluginPrefix(client, "General.Command.Notification.InvalidValue", $"{MinDuration} - {MaxDuration}"));
             return;
         }
 
@@ -84,7 +56,7 @@ public sealed partial class AdminMessaging
                     if(target.IsBot || target.IsHLTV)
                         continue;
                 
-                    target.PrintToCenterHtml(LocalizeStringForPlayer(target, "AdminMessaging.HtmlSay.HtmlMessage", executorName, message.ReplaceColorTags()));
+                    target.PrintToCenterHtml(LocalizeString(target, "AdminMessaging.HtmlSay.HtmlMessage", executorName, message.ReplaceColorTags()));
                 }
             },TimerFlags.REPEAT | TimerFlags.STOP_ON_MAPCHANGE);
         }
@@ -93,7 +65,7 @@ public sealed partial class AdminMessaging
             timer = Plugin.AddTimer(0.01F, () =>
             {
                 CCSPlayerController target = targets.First();
-                target.PrintToCenterHtml(LocalizeStringForPlayer(target, "AdminMessaging.HtmlSay.HtmlMessage", executorName, message.ReplaceColorTags()));
+                target.PrintToCenterHtml(LocalizeString(target, "AdminMessaging.HtmlSay.HtmlMessage", executorName, message.ReplaceColorTags()));
             },TimerFlags.REPEAT | TimerFlags.STOP_ON_MAPCHANGE);
         }
         

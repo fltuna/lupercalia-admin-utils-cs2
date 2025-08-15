@@ -32,7 +32,7 @@ public class RespawnPlayer(IServiceProvider serviceProvider) : PluginModuleBase(
     {
         if (info.ArgCount <= 1)
         {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("Respawn.Command.Notification.Usage"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "Respawn.Command.Notification.Usage"));
             return;
         }
         
@@ -40,7 +40,7 @@ public class RespawnPlayer(IServiceProvider serviceProvider) : PluginModuleBase(
         TargetResult targets = info.GetArgTargetResult(1);
         
         if(!targets.Any()) {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.TargetNotFound"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "General.Command.Notification.TargetNotFound"));
             return;
         }
         
@@ -60,11 +60,11 @@ public class RespawnPlayer(IServiceProvider serviceProvider) : PluginModuleBase(
                 if (target.Team is CsTeam.None or CsTeam.Spectator)
                     continue;
             
-                target.PrintToChat(LocalizeWithPluginPrefix("Respawn.Command.Notification.YouHaveRespawned", executorName));
+                target.PrintToChat(LocalizeWithPluginPrefix(client, "Respawn.Command.Notification.YouHaveRespawned", executorName));
                 target.Respawn();
             }
 
-            string targetName = LocalizeString(TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
+            string targetName = LocalizeString(client, TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
             
             PrintLocalizedChatToAll("Respawn.Command.Broadcast.PlayerRespawned", executorName, targetName);
         }
@@ -74,17 +74,17 @@ public class RespawnPlayer(IServiceProvider serviceProvider) : PluginModuleBase(
 
             if (PlayerUtil.IsPlayerAlive(target))
             {
-                info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.TargetIsStillAlive", target.PlayerName));
+                info.ReplyToCommand(LocalizeWithPluginPrefix(client, "General.Command.Notification.TargetIsStillAlive", target.PlayerName));
                 return;
             }
 
             if (target.Team is CsTeam.None or CsTeam.Spectator)
             {
-                info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.TargetNotFound"));
+                info.ReplyToCommand(LocalizeWithPluginPrefix(client, "General.Command.Notification.TargetNotFound"));
             }
             
             target.Respawn();
-            target.PrintToChat(LocalizeWithPluginPrefix("Respawn.Command.Notification.YouHaveRespawned", executorName));
+            target.PrintToChat(LocalizeWithPluginPrefix(client, "Respawn.Command.Notification.YouHaveRespawned", executorName));
             PrintLocalizedChatToAll("Respawn.Command.Broadcast.PlayerRespawned", executorName, target.PlayerName);
         }
     }

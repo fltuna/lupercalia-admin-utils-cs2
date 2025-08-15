@@ -32,26 +32,26 @@ public class SetCash(IServiceProvider serviceProvider) : PluginModuleBase(servic
     {
         if (info.ArgCount <= 2)
         {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("SetCash.Command.Notification.Usage"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "SetCash.Command.Notification.Usage"));
             return;
         }
 
         if (!int.TryParse(info.GetArg(2), out int targetCash))
         {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.InvalidArgumentsInput"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "General.Command.Notification.InvalidArgumentsInput"));
             return;
         }
 
         if (targetCash <= 0)
         {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.InvalidValue", "1<"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "General.Command.Notification.InvalidValue", "1<"));
             return;
         }
             
         TargetResult targets = info.GetArgTargetResult(1);
         
         if(!targets.Any()) {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.TargetNotFound"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "General.Command.Notification.TargetNotFound"));
             return;
         }
 
@@ -70,7 +70,7 @@ public class SetCash(IServiceProvider serviceProvider) : PluginModuleBase(servic
                 PlayerUtil.SetPlayerMoney(target, targetCash);
             }
 
-            string targetName = LocalizeString(TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
+            string targetName = LocalizeString(client, TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
             
             PrintLocalizedChatToAll("SetCash.Command.Broadcast.SetCash", executorName, targetName, targetCash);
         }
@@ -80,7 +80,7 @@ public class SetCash(IServiceProvider serviceProvider) : PluginModuleBase(servic
 
             if (!PlayerUtil.IsPlayerAlive(target))
             {
-                info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.TargetIsDead", target.PlayerName));
+                info.ReplyToCommand(LocalizeWithPluginPrefix(client, "General.Command.Notification.TargetIsDead", target.PlayerName));
                 return;
             }
             

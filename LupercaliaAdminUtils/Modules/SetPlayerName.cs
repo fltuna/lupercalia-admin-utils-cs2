@@ -32,7 +32,7 @@ public class SetPlayerName(IServiceProvider serviceProvider) : PluginModuleBase(
     {
         if (info.ArgCount <= 2)
         {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("SetPlayerName.Command.Notification.Usage"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "SetPlayerName.Command.Notification.Usage"));
             return;
         }
         
@@ -41,7 +41,7 @@ public class SetPlayerName(IServiceProvider serviceProvider) : PluginModuleBase(
         TargetResult targets = info.GetArgTargetResult(1);
         
         if(!targets.Any()) {
-            info.ReplyToCommand(LocalizeWithPluginPrefix("General.Command.Notification.TargetNotFound"));
+            info.ReplyToCommand(LocalizeWithPluginPrefix(client, "General.Command.Notification.TargetNotFound"));
             return;
         }
 
@@ -58,7 +58,7 @@ public class SetPlayerName(IServiceProvider serviceProvider) : PluginModuleBase(
                 PlayerUtil.SetPlayerName(target, nameChangeTo);
             }
 
-            string targetName = LocalizeString(TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
+            string targetName = LocalizeString(client, TargetTypeStringConverter.GetTargetTypeName(info.GetArg(1)));
             
             PrintLocalizedChatToAll("SetPlayerName.Command.Broadcast.NameChanged", executorName, targetName, nameChangeTo);
         }
