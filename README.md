@@ -1,3 +1,5 @@
+# DEPRECATED USE [TNCSSAdminUtils](https://github.com/fltuna/TNCSSAdminUtils) instead.
+
 # Lupercalia Admin Utils
 
 This plugin provides convenient command for server administration.
